@@ -16,21 +16,33 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/tramites', function () {
-    return view('tramites.index');
-})->name('tramites.index');
 
-Route::get('/certificados', function () {
-    return view('certificados.index');
-})->name('certificados.index');
 
-Route::get('/ventas', function () {
-    return view('ventas.index');
-})->name('ventas.index');
-
-Route::get('/dashboard', function () {
-    return view('dash.index');
-});
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware'=>['auth']],function (){
+    //RUTAS PARA TRAMITES
+    Route::get('/tramites', function () {
+        return view('tramites.index'); //REDERIZA VISTA
+    })->name('tramites.index');
+    Route::get('/tramites/prueba', function () {
+        return view('tramites.prueba'); //REDERIZA VISTA
+    })->name('tramites.prueba');
+
+
+    //RUTAS PARA CERTIFICADOS
+    Route::get('/certificados', function () {
+        return view('certificados.index'); //REDERIZA VISTA
+    })->name('certificados.index');
+
+    //RUTAS PARA VENTAS
+    Route::get('/ventas', function () {
+        return view('ventas.index'); //REDERIZA VISTA
+    })->name('ventas.index');
+
+    Route::get('/dashboard', function () {
+        return view('dash.index'); //REDERIZA VISTA
+    })->name('dash.index');;
+});
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

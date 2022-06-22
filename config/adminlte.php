@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -248,17 +248,17 @@ return [
         ],
         ['header' => 'MODULOS'],
         [
-            'text' => 'certificados',
+            'text' => 'Certificados',
             'route'  => 'certificados.index',
             'icon' => 'fas fa-fw fa-book',
         ],
         [
-            'text' => 'tramites',
+            'text' => 'Tramites',
             'route'  => 'tramites.index',
             'icon' => 'fas fa-fw fa-book',
         ],
         [
-            'text' => 'ventas',
+            'text' => 'Ventas',
             'route'  => 'ventas.index',
             'icon' => 'fas fa-fw fa-book',
         ],
