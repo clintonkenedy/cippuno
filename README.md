@@ -3,5 +3,4 @@
 - composer install
 - npm install
 - npm run dev
-- php artisan migrate
-- php aritsan key generate
+- php aritsan key:generate
