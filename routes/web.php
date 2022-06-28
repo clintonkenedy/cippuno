@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ColegiadoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,9 +22,11 @@ Auth::routes();
 
 Route::group(['middleware'=>['auth']],function (){
     //RUTAS PARA TRAMITES
-    Route::get('/tramites', function () {
+Route::resource('tramites',ColegiadoController::class);
+    /*Route::get('/tramites', function () {
         return view('tramites.index'); //REDERIZA VISTA
-    })->name('tramites.index');
+    })->name('tramites.index');*/
+
     Route::get('/tramites/prueba', function () {
         return view('tramites.prueba'); //REDERIZA VISTA
     })->name('tramites.prueba');

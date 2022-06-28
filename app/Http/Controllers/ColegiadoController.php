@@ -15,6 +15,9 @@ class ColegiadoController extends Controller
     public function index()
     {
         //
+        $colegiados=Colegiado::all();
+        //dd($colegiados);
+        return view('tramites.index',compact('colegiados'));
     }
 
     /**
@@ -47,6 +50,7 @@ class ColegiadoController extends Controller
     public function show(Colegiado $colegiado)
     {
         //
+
     }
 
     /**

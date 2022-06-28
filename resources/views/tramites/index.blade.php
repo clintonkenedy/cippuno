@@ -9,6 +9,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <h1>DESDE TRAMITES</h1>
+            <p>holaaaa</p>
+            <p>{{$colegiados->capitulo}}</p>
         </div>
     </div>
 @stop
