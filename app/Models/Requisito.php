@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Requisito extends Model
 {
     use HasFactory;
+    public function requisito_tipo_tramites(){
+        return $this->hasMany(Requisito_tipo_tramite::class);
+    }
 }

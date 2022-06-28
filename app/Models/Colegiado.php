@@ -13,4 +13,16 @@ class Colegiado extends Model
     public function capitulo(){
         return $this->belongsTo(Capitulo::class);
     }
+
+    public function pagos(){
+        return $this->hasMany(Pago::class);
+    }
+
+    public function matriculas(){
+        return $this->hasMany(Matricula::class);
+    }
+
+    public function tramites(){
+        return $this->hasMany(Tramite::class);
+    }
 }

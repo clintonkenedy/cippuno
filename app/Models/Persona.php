@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Persona extends Model
 {
     use HasFactory;
+
+    public function pagos(){
+        return $this->hasMany(Pago::class);
+    }
+    public function tramites(){
+        return $this->hasMany(Tramite::class);
+    }
 }

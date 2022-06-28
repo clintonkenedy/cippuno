@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Pago;
 use Illuminate\Http\Request;
 
+
+use App\Http\Resources\V1\PagoResource;
 class PagoController extends Controller
 {
     /**
@@ -15,7 +17,8 @@ class PagoController extends Controller
      */
     public function index()
     {
-        //
+        //test
+        return PagoResource::collection(Pago::latest()->paginate());
     }
 
     /**
@@ -38,7 +41,7 @@ class PagoController extends Controller
     public function show(Pago $pago)
     {
         //
-        return $pago;
+        return new PagoResource($pago);
     }
 
     /**
@@ -62,5 +65,9 @@ class PagoController extends Controller
     public function destroy(Pago $pago)
     {
         //
+        $pago->delete();
+        return response()->json([
+            'message'=>'Success'
+        ],204);
     }
 }

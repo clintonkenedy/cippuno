@@ -20,4 +20,12 @@ class Pago extends Model
     public function pago_conceptos(){
         return $this->hasMany(Pago_concepto::class);
     }
+
+    public function colegiado(){
+        return $this->belongsTo(Colegiado::class);
+    }
+
+    public function persona(){
+        return $this->belongsTo(Persona::class);
+    }
 }

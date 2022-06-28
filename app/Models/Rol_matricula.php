@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Rol_matricula extends Model
 {
     use HasFactory;
+
+    public function matriculas(){
+        return $this->hasMany(Matricula::class);
+    }
 }
