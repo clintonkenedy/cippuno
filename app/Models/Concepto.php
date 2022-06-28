@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Concepto extends Model
 {
     use HasFactory;
+    //uno a muchos
+    public function pago_conceptos(){
+        return $this->hasMany(Pago_concepto::class);
+    }
 }

@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Colegiado;
+
+
+use App\Models\Concepto;
 use Illuminate\Http\Request;
 
+
+use App\Models\Colegiado;
+use App\Models\Capitulo;
+use App\Models\Pago_concepto;
 class ColegiadoController extends Controller
 {
     /**
@@ -16,8 +22,10 @@ class ColegiadoController extends Controller
     {
         //
         $colegiados=Colegiado::all();
-        //dd($colegiados);
-        return view('tramites.index',compact('colegiados'));
+        $capitulos =Capitulo::all();
+        $pago_concep = Pago_concepto::all();
+        dd(Concepto::all()->first()->pago_conceptos);
+        return view('tramites.index',compact('colegiados','capitulos'));
     }
 
     /**

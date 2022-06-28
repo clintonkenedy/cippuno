@@ -10,7 +10,11 @@
         <div class="row justify-content-center">
             <h1>DESDE TRAMITES</h1>
             <p>holaaaa</p>
-            <p>{{$colegiados->capitulo}}</p>
+            @foreach($colegiados as $colegiado)
+                <p>{{$colegiado->capitulos}}</p>
+                <h1>{{$capitulos->last()->colegiados}}</h1>
+            @endforeach
+
         </div>
     </div>
 @stop
