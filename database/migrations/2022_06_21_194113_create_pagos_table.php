@@ -17,10 +17,10 @@ class CreatePagosTable extends Migration
             $table->id();
             $table->char('numero',7);
             $table->text('observaciones');
-            $table->foreignId('colegiado_id')->constrained('colegiados')->onUpdate('cascade');
+            $table->foreignId('colegiado_id')->nullable()->constrained('colegiados')->onUpdate('cascade');
             $table->foreignId('sede_id')->constrained('sedes')->onUpdate('cascade');
             $table->foreignId('forma_pago_id')->constrained('forma_pagos')->onUpdate('cascade');
-            $table->foreignId('persona_id')->constrained('personas')->onUpdate('cascade');
+            $table->foreignId('persona_id')->nullable()->constrained('personas')->onUpdate('cascade');
             $table->timestamps();
         });
     }
