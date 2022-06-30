@@ -258,8 +258,8 @@ return [
             'icon' => 'fas fa-fw fa-book',
         ],
         [
-            'text' => 'Ventas',
-            'route'  => 'ventas.index',
+            'text' => 'Caja',
+            'route'  => 'caja.index',
             'icon' => 'fas fa-fw fa-book',
         ],
         // ['header' => 'labels'],

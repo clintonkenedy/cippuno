@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
+use App\Http\Controllers\PagoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,10 +24,12 @@ Auth::routes();
 
 Route::group(['middleware'=>['auth']],function (){
     //RUTAS PARA TRAMITES
-Route::resource('tramites',ColegiadoController::class);
-    /*Route::get('/tramites', function () {
+    Route::resource('colegiado',ColegiadoController::class);
+    Route::resource('caja', PagoController::class);
+
+    Route::get('/tramites', function () {
         return view('tramites.index'); //REDERIZA VISTA
-    })->name('tramites.index');*/
+    })->name('tramites.index');
 
     Route::get('/tramites/prueba', function () {
         return view('tramites.prueba'); //REDERIZA VISTA
@@ -38,9 +42,9 @@ Route::resource('tramites',ColegiadoController::class);
     })->name('certificados.index');
 
     //RUTAS PARA VENTAS
-    Route::get('/ventas', function () {
-        return view('ventas.index'); //REDERIZA VISTA
-    })->name('ventas.index');
+    // Route::get('/ventas', function () {
+    //     return view('ventas.index'); //REDERIZA VISTA
+    // })->name('ventas.index');
 
     Route::get('/dashboard', function () {
         return view('dash.index'); //REDERIZA VISTA
