@@ -12,4 +12,8 @@ class Concepto extends Model
     public function pago_conceptos(){
         return $this->hasMany(Pago_concepto::class);
     }
+    //muchos a muchos
+    public function pagos(){
+        return $this->belongsToMany(Pago::class);
+    }
 }

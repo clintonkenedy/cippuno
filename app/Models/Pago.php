@@ -17,10 +17,13 @@ class Pago extends Model
         return $this->belongsTo(Sede::class);
     }
     //uno a muchos
-    public function pago_conceptos(){
-        return $this->hasMany(Pago_concepto::class);
+    //public function pago_conceptos(){
+    //    return $this->hasMany(Pago_concepto::class);
+    //}
+    //relaciones muchos amuchos
+    public function conceptos(){
+        return $this->belongsToMany(Concepto::class);
     }
-
     public function colegiado(){
         return $this->belongsTo(Colegiado::class);
     }
@@ -28,4 +31,6 @@ class Pago extends Model
     public function persona(){
         return $this->belongsTo(Persona::class);
     }
+
+
 }

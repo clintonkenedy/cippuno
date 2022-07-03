@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePagoConceptosTable extends Migration
+class CreateConceptoPagoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePagoConceptosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pago_conceptos', function (Blueprint $table) {
+        Schema::create('concepto_pago', function (Blueprint $table) {
             $table->id();
             $table->string('cantidad',50);
             $table->double('precio',8,4);
@@ -32,6 +32,6 @@ class CreatePagoConceptosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pago_conceptos');
+        Schema::dropIfExists('concepto_pago');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRequisitoTipoTramitesTable extends Migration
+class CreateRequisitoTipoTramiteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRequisitoTipoTramitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('requisito_tipo_tramites', function (Blueprint $table) {
+        Schema::create('requisito_tipo_tramite', function (Blueprint $table) {
             $table->id();
             $table->foreignId('requisito_id')->constrained('requisitos')
                 ->onUpdate('cascade');
@@ -30,6 +30,6 @@ class CreateRequisitoTipoTramitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requisito_tipo_tramites');
+        Schema::dropIfExists('requisito_tipo_tramite');
     }
 }

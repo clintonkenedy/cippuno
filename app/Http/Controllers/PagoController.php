@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConceptoPago;
 use App\Models\Pago;
 use App\Models\Forma_Pago;
 use App\Models\Sede;
@@ -19,13 +20,21 @@ class PagoController extends Controller
      */
     public function index()
     {
+
         $pagos = Pago::all();
         $forma_pagos = Forma_Pago::all();
         $sedes = Sede::all();
-        $pago_conceptos = Pago_concepto::all();
+        $pago_conceptos = ConceptoPago::all();
         $conceptos = Concepto::all();
 
-        return view('caja.index', compact('pagos', 'forma_pagos', 'sedes', 'pago_conceptos', 'conceptos'));
+
+
+        $conceptos2 = Concepto::find(1);
+        //dd($conceptos2->pagos);
+        $pagos2 = Pago::find(2);
+//        dd($pagos2->conceptos);
+
+        return view('caja.index', compact('pagos', 'forma_pagos', 'sedes', 'pago_conceptos', 'conceptos','pagos2','conceptos2'));
     }
 
     /**
