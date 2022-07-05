@@ -26,6 +26,7 @@ Route::group(['middleware'=>['auth']],function (){
     //RUTAS PARA TRAMITES
     Route::resource('colegiado',ColegiadoController::class);
     Route::resource('caja', PagoController::class);
+    Route::get('/buscar/{dni}', [ColegiadoController::class,'buscardni'])->name('colegiado.buscar');
 
     Route::get('/tramites', function () {
         return view('tramites.index'); //REDERIZA VISTA

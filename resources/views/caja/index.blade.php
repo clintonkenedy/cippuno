@@ -8,10 +8,10 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <h1>DESDE VENTAS</h1>
+            <h1>CAJA CIP PUNO</h1>
         </div>
         <div class="row justify-content-end">
-            <button class="btn btn-primary">Nueva Venta</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Nueva Venta</button>
         </div>
         <table id="caja" class="table table-striped mt-2">
             <thead>
@@ -29,8 +29,8 @@
                     <td>{{ $pago->id }}</td>
                     <td>{{ $pago->numero }}</td>
                     <td>{{ $pago->observaciones }}</td>
-                    <td>{{ $pago->sede_id }}</td>
-                    <td>{{ $pago->forma_pago_id }}</td>
+                    <td>{{ $pago->sede->nombre  }}</td>
+                    <td>{{ $pago->forma_pago->nombre  }}</td>
                     @if ($pago->persona_id)
                         <td> <span class="badge bg-warning">Persona Natural</span></td>
                     @else
@@ -41,7 +41,7 @@
                 @endforeach
             </tbody>
         </table>
-        <h2>Concepto Pago</h2>
+        {{-- <h2>Concepto Pago</h2>
         <p>Concepto: {{$conceptos2->nombre}}</p>
         <table id="caja" class="table table-striped mt-2">
             <thead>
@@ -59,7 +59,7 @@
                     <td>{{ $pago->id }}</td>
                     <td>{{ $pago->numero }}</td>
                     <td>{{ $pago->observaciones }}</td>
-                    <td>{{ $pago->sede_id }}</td>
+                    <td>{{ $pago->sede->nombre }}</td>
                     <td>{{ $pago->forma_pago_id }}</td>
                     @if ($pago->persona_id)
                         <td> <span class="badge bg-warning">Persona Natural</span></td>
@@ -70,7 +70,130 @@
                 </tr>
             @endforeach
             </tbody>
-        </table>
+        </table> --}}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">NUEVO PAGO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form id="crearPago" name="crearPago" class="mt-2"  url="javascript:void(0)" method="POST">
+                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="dni">
+                            DNI
+                        <span style="color: red;">*</span>
+                        </label>
+                        <div class="input-group">
+                            {{-- <form action=" {{ route("colegiado.buscar", '64694794') }} " method="get"> --}}
+                            <input type="text" class="form-control" placeholder="Ingrese DNI" aria-label="Ingrese DNI" id="dni">
+                            <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="buscarDNI" onclick="buscar(dni.value)">Buscar</button>
+                            </div>
+                          </div>
+                        <div id="messageEvento" style="color:salmon" hidden>
+                            Ingrese caracteres validos.
+                        </div>
+                        <div id="errorEvento" class=""></div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="evento" class="form-label">
+                            Apellido Paterno:
+                        <span style="color: red;">*</span>
+                        </label>
+                        {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
+                        <input type="text" name="" id="" class="form-control" readonly>
+                        {{-- @error('evento')
+                    <span class="invalid-feedback">
+                        <strong> {{$message}} </strong>
+                    </span>
+                    @enderror --}}
+                        <div id="errorEvento" class=""></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="evento" class="form-label">
+                            Apellido Materno:
+                        <span style="color: red;">*</span>
+                        </label>
+                        {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
+                        <input type="text" name="" id="" class="form-control" readonly>
+                        {{-- @error('evento')
+                    <span class="invalid-feedback">
+                        <strong> {{$message}} </strong>
+                    </span>
+                    @enderror --}}
+                        <div id="errorEvento" class=""></div>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label for="evento" class="form-label">
+                            Nombres:
+                        <span style="color: red;">*</span>
+                        </label>
+                        {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
+                        <input type="text" name="" id="" class="form-control" readonly>
+                        {{-- @error('evento')
+                    <span class="invalid-feedback">
+                        <strong> {{$message}} </strong>
+                    </span>
+                    @enderror --}}
+                        <div id="errorEvento" class=""></div>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label for="evento" class="form-label">
+                            Observaciones:
+                        <span style="color: red;">*</span>
+                        </label>
+                        {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
+                        {{-- <input type="text" name="" id="" class="form-control"> --}}
+                        <textarea name="" id="" class="form-control" placeholder="Ingrese Observaciones"></textarea>
+                        {{-- @error('evento')
+                    <span class="invalid-feedback">
+                        <strong> {{$message}} </strong>
+                    </span>
+                    @enderror --}}
+                        <div id="errorEvento" class=""></div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="" class="form-label">
+                            Concepto de Pago:
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="row">
+                            <div class="col-10">
+                                <select class="custom-select">
+                                    <option selected>Conceptos...</option>
+                                    <option value="1">Concepto 01</option>
+                                    <option value="2">Concepto 02</option>
+                                    <option value="3">Concepto 03</option>
+                                </select>
+
+                            </div>
+                            <div class="col-2">
+                                <a class="btn btn-warning float-right">Agregar</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </form>
+    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+        </div>
     </div>
 @stop
 @section('css')
@@ -78,6 +201,21 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+    <script type="text/javascript">
+        // const dni = document.getElementById("dni").value;
+
+        // const buscar = ( dni ) => {
+        //     console.log("hola");
+        //     console.log(dni);
+        //     fetch("http://127.0.0.1:8000/buscar/32323")
+        //         .then(response => 'funca')
+        //         .then(data => 'xd');
+        // };
+
+        // function buscar() {
+        //     console.log("hola")
+        // }
+    </script>
 @stop
 
 

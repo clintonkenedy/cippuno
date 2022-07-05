@@ -57,7 +57,14 @@ class ColegiadoController extends Controller
      */
     public function show(Colegiado $colegiado)
     {
-        //
+
+    }
+
+    public function buscardni($dni)
+    {
+        $colegiado=Colegiado::find($dni);
+        dd($colegiado);
+        return $colegiado;
 
     }
 
