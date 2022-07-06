@@ -167,23 +167,23 @@
                     @enderror --}}
                         <div id="errorEvento" class=""></div>
                     </div>
-                    <div class="col-md-12 mb-3">
+                    <div class="col-md-12">
                         <label for="" class="form-label">
                             Concepto de Pago:
                             <span style="color: red;">*</span>
                         </label>
                         <div class="row">
-                            <div class="col-10">
-                                <select class="custom-select">
-                                    <option selected>Conceptos...</option>
-                                    <option value="1">Concepto 01</option>
-                                    <option value="2">Concepto 02</option>
-                                    <option value="3">Concepto 03</option>
+                            <div class="col-10" id="divconceptos">
+                                <select class="custom-select mb-2" name="concepto1" id="selectconcepto">
+                                    <option selected>Seleccion concepto de pago</option>
+                                    @foreach ($conceptos as $concepto)
+                                    <option value="1">{{$concepto->nombre}}     -   {{$concepto->precio}}</option>
+                                    @endforeach
                                 </select>
 
                             </div>
                             <div class="col-2">
-                                <a class="btn btn-warning float-right">Agregar</a>
+                                <button class="btn btn-warning float-right" type="button" onclick="addConcepto()">Agregar</button>
                             </div>
                         </div>
 
@@ -248,6 +248,21 @@
             }
         };
 
+        var i = 2 //CONTADOR
+        const addConcepto = () => {
+            // const concepto = document.createElement("select");
+            // const clase = document.createAttribute("class");
+            // clase.value = "custom-select";
+
+            const concepto = document.getElementById("selectconcepto");
+            const clon = concepto.cloneNode(true);
+            clon.setAttribute('name','concepto'+i);
+            const divconcepto = document.getElementById("divconceptos");
+            // const aux = concepto;
+            // console.log(divconcepto);
+            divconcepto.appendChild(clon);
+            i++;
+        }
 
     </script>
 @stop
