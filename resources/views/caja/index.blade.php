@@ -11,13 +11,13 @@
             <h1>CAJA CIP PUNO</h1>
         </div>
         <div class="row justify-content-end">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Nueva Venta</button>
+            <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#staticBackdrop">Nueva Venta</button>
         </div>
         <table id="caja" class="table table-striped mt-2">
             <thead>
                 <th>Id</th>
                 <th>Numero</th>
-                <th>Obs</th>
+                {{-- <th>Obs</th> --}}
                 <th>Sede</th>
                 <th>Forma de Pago</th>
                 <th>Tipo de Persona</th>
@@ -28,7 +28,7 @@
                 <tr>
                     <td>{{ $pago->id }}</td>
                     <td>{{ $pago->numero }}</td>
-                    <td>{{ $pago->observaciones }}</td>
+                    {{-- <td>{{ $pago->observaciones }}</td> --}}
                     <td>{{ $pago->sede->nombre  }}</td>
                     <td>{{ $pago->forma_pago->nombre  }}</td>
                     @if ($pago->persona_id)
@@ -264,6 +264,9 @@
             i++;
         }
 
+        $(document).ready( function () {
+            $('#caja').DataTable();
+        } );
     </script>
 @stop
 
