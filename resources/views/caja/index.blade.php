@@ -84,7 +84,7 @@
             </button>
             </div>
             <div class="modal-body">
-                <form id="crearPago" name="crearPago" class="mt-2"  url="javascript:void(0)" method="POST">
+                <form id="crearPago" name="crearPago" class=""  url="javascript:void(0)" method="POST">
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <div class="row">
                     <div class="col-md-12 mb-3">
@@ -94,23 +94,26 @@
                         </label>
                         <div class="input-group">
                             {{-- <form action=" {{ route("colegiado.buscar", '64694794') }} " method="get"> --}}
-                            <input type="text" class="form-control" placeholder="Ingrese DNI" aria-label="Ingrese DNI" id="dni">
+                            <input type="text" class="form-control xd" placeholder="Ingrese DNI" aria-label="Ingrese DNI" id="dni">
                             <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" id="buscarDNI" onclick="buscar(dni.value)">Buscar</button>
+                            <button class="btn btn-primary" type="button" id="buscarDNI" onclick="buscar(dni)">Buscar</button>
                             </div>
                           </div>
                         <div id="messageEvento" style="color:salmon" hidden>
                             Ingrese caracteres validos.
                         </div>
+                        <div id="noEncontrado" style="color:salmon" hidden>
+                            Usuario no encontrado
+                        </div>
                         <div id="errorEvento" class=""></div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="evento" class="form-label">
+                        <label for="apaterno" class="form-label">
                             Apellido Paterno:
                         <span style="color: red;">*</span>
                         </label>
                         {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
-                        <input type="text" name="" id="" class="form-control" readonly>
+                        <input type="text" name="apaterno" id="apaterno" class="form-control" readonly>
                         {{-- @error('evento')
                     <span class="invalid-feedback">
                         <strong> {{$message}} </strong>
@@ -120,12 +123,12 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="evento" class="form-label">
+                        <label for="amaterno" class="form-label">
                             Apellido Materno:
                         <span style="color: red;">*</span>
                         </label>
                         {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
-                        <input type="text" name="" id="" class="form-control" readonly>
+                        <input type="text" name="amaterno" id="amaterno" class="form-control" readonly>
                         {{-- @error('evento')
                     <span class="invalid-feedback">
                         <strong> {{$message}} </strong>
@@ -135,12 +138,12 @@
                     </div>
 
                     <div class="col-md-12 mb-3">
-                        <label for="evento" class="form-label">
+                        <label for="nombres" class="form-label">
                             Nombres:
                         <span style="color: red;">*</span>
                         </label>
                         {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
-                        <input type="text" name="" id="" class="form-control" readonly>
+                        <input type="text" name="nombres" id="nombres" class="form-control" readonly>
                         {{-- @error('evento')
                     <span class="invalid-feedback">
                         <strong> {{$message}} </strong>
@@ -204,17 +207,48 @@
     <script type="text/javascript">
         // const dni = document.getElementById("dni").value;
 
-        // const buscar = ( dni ) => {
-        //     console.log("hola");
-        //     console.log(dni);
-        //     fetch("http://127.0.0.1:8000/buscar/32323")
-        //         .then(response => 'funca')
-        //         .then(data => 'xd');
-        // };
+        const buscar = async ( dni ) => {
+            const apaterno = document.getElementById('apaterno');
+            const amaterno = document.getElementById('amaterno');
+            const nombres = document.getElementById('nombres');
+            if (dni.value.toString().length != 8) return //VALIDACION SIMPLE PARA DNI
 
-        // function buscar() {
-        //     console.log("hola")
-        // }
+            const resp = await fetch(`http://127.0.0.1:8000/buscar/${dni.value}`); //BUSCA EN LA TABLA COLEGIADOS
+
+            const {status, data} = await resp.json(); //DESESTRUCTURACION DE RESPUESTA
+
+            if (status == 'ok') { //SI EXISTE COLEGIADO
+                //IMPRESION DE VALORES EN INPUTS
+                apaterno.value = data.a_paterno;
+                amaterno.value = data.a_materno;
+                nombres.value = data.nombres;
+                //ESTILOS
+                document.getElementById('noEncontrado').hidden = true;
+                if(dni.classList.contains('is-invalid')){
+                    dni.classList.replace('is-invalid','is-valid')
+                }
+                else{
+                    dni.classList.add('is-valid');
+                }
+
+            }
+            else {
+                //IMPRESION DE VALORES EN INPUTS
+                apaterno.value = '';
+                amaterno.value = '';
+                nombres.value = '';
+                //ESTILOS
+                document.getElementById('noEncontrado').hidden = false;
+                if(dni.classList.contains('is-valid')){
+                    dni.classList.replace('is-valid','is-invalid')
+                }
+                else{
+                    dni.classList.add('is-invalid');
+                }
+            }
+        };
+
+
     </script>
 @stop
 

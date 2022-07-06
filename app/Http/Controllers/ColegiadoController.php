@@ -62,9 +62,26 @@ class ColegiadoController extends Controller
 
     public function buscardni($dni)
     {
-        $colegiado=Colegiado::find($dni);
-        dd($colegiado);
-        return $colegiado;
+        // $colegiado=Colegiado::find($dni);
+        $colegiado = Colegiado::where('dni', $dni)->get();
+        if (count($colegiado) >= 1) {
+            return response()->json([
+                'status' => 'ok',
+                'data' => $colegiado[0],
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'data' => 'Colegiado no encontrado',
+        ]);
+
+
+
+        // return response()->json([
+        //     'status' => 'ok',
+        //     'data' => $colegiado,
+        // ]);
 
     }
 
