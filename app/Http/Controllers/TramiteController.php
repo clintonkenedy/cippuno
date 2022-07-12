@@ -7,35 +7,34 @@ use Illuminate\Http\Request;
 
 class TramiteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('tramites.prueba');
+        return view('tramites.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
-        //
+      $tramites = new Tramite();
+      $tramites->id = '';     
+      $tramites->tipo_tramite_id = $request->input('tipo_tramite_id');
+      $tramites->asunto = $request->input('asunto');
+      $tramites->fecha_emi = $request->input('fecha_emi');
+      $tramites->fecha_recep = $request->input('fecha_recep');
+   //   $tramites->colegiado_id = '7';
+   //   $tramites->persona_id = '2';
+      
+      //dd($tramites);
+      $tramites->save();
+
+      return redirect()->route("tramites.index")->with("success", "Agregado con exito!");
+      print_r($_POST);
     }
 
     /**
