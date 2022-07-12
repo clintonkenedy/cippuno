@@ -15,7 +15,7 @@ class TramiteController extends Controller
 
     public function create()
     {
-        //
+        return view("tramites.creartrami");
     }
 
  
