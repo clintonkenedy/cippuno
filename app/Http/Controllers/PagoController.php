@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ConceptoPago;
 use App\Models\Pago;
-use App\Models\Forma_Pago;
+use App\Models\Forma_pago;
 use App\Models\Sede;
-use App\Models\Pago_concepto;
 use App\Models\Concepto;
 use Illuminate\Http\Request;
 
@@ -22,7 +21,7 @@ class PagoController extends Controller
     {
 
         $pagos = Pago::all();
-        $forma_pagos = Forma_Pago::all();
+        $forma_pagos = Forma_pago::all();
         $sedes = Sede::all();
         $pago_conceptos = ConceptoPago::all();
         $conceptos = Concepto::all();
