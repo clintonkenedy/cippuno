@@ -20,7 +20,7 @@ class PagoController extends Controller
      */
     public function index()
     {
-        dd(ConceptoPago::find(1)->pago_);
+
         $pagos = Pago::all();
         $forma_pagos = Forma_pago::all();
         $sedes = Sede::all();
