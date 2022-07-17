@@ -84,7 +84,7 @@
             </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('colegiado.store')}}" id="crearPago" name="crearPago" class=""  url="javascript:void(0)" method="POST">
+                <form action="{{route('caja.store')}}" id="crearPago" name="crearPago" class=""  url="javascript:void(0)" method="POST">
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <div class="row">
                     <div class="col-md-12 mb-3">
