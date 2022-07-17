@@ -216,7 +216,7 @@
             const dnia1 = document.getElementById('dnia');
             if (dni.value.toString().length != 8) return //VALIDACION SIMPLE PARA DNI
 
-            const resp = await fetch(`http://127.0.0.1:8000/buscar/${dni.value}`); //BUSCA EN LA TABLA COLEGIADOS
+            const resp = await fetch(`http://caja.cipservice/buscar/${dni.value}`); //BUSCA EN LA TABLA COLEGIADOS
 
             const {status, data} = await resp.json(); //DESESTRUCTURACION DE RESPUESTA
 
