@@ -4,53 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\Tramite;
 use Illuminate\Http\Request;
-use App\Models\Colegiado;
-use App\Models\Pago;
-use App\Models\User;
-
 
 class TramiteController extends Controller
-
-
 {
-    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $users = User::all();
-        $colegiados = Colegiado::all();
-        $pagos = Pago::all();
-        $tramites = Tramite::all();
-        return view('tramites.index', compact('pagos','colegiados','users','tramites'));
-       // $colegiado->id = $request->get('id');
-      //  $colegiado = "holao";
-      //  return view('tramites.index');
-
+        return view('tramites.prueba');
     }
 
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view("tramites.creartrami");
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-      $tramites = new Tramite();
-      $tramites->id = '';     
-      $tramites->tipo_tramite_id = $request->input('tipo_tramite_id');
-      $tramites->asunto = $request->input('asunto');
-      $tramites->fecha_emi = $request->input('fecha_emi');
-      $tramites->fecha_recep = $request->input('fecha_recep');
-      $tramites->archivo =$request->input('tipo_tramite_id');
-      //Tramite::insert($tramites)
-   //   $tramites->colegiado_id = '7';
-   //   $tramites->persona_id = '2';
-      
-      //dd($tramites);
-      $tramites->save();
-
-      return redirect()->route("tramites.index")->with("success", "Agregado con exito!");
-      print_r($_POST);
+        //
     }
 
     /**
@@ -59,18 +44,9 @@ class TramiteController extends Controller
      * @param  \App\Models\Tramite  $tramite
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Tramite $tramite)
     {
-        $users = User::all();
-        $colegiados = Colegiado::all();
-        $pagos = Pago::all();
-        $tramites = Tramite::all();
-        return view('tramites.mostrar', compact('pagos','colegiados','users','tramites'));
-     //   $tramites->tipo_tramite_id = $request->get('tipo_tramite_id');
-     //   $tramites->asunto = $request->get('asunto');
-      //  $tramites->fecha_emi = $request->get('fecha_emi');
-     //   $tramites->fecha_recep = $request->get('fecha_recep');
-     //   $tramites->archivo =$request->get('tipo_tramite_id');
+        //
     }
 
     /**
