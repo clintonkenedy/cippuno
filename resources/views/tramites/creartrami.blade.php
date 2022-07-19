@@ -21,6 +21,8 @@
   <input id="fecha_emi" type="date" name="fecha_emi" placeholder="Fecha Emision"><br>
   <label for="">Fecha Recepcion</label>
   <input id="fecha_recep" type="date" name="fecha_recep" placeholder="Fecha Recepcion"><br>
+  <label for="formFileMultiple" class="form-label">Adjuntar Archivos Necesarios</label>
+  <input class="form-control" type="file" name="archivo" id="formFileMultiple" multiple>
   <button class="btn btn-primary" type="submit">Enviar</button>
 </form>
 @stop

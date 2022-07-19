@@ -4,21 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Tramite;
 use Illuminate\Http\Request;
+use App\Models\Colegiado;
+use App\Models\Pago;
+use App\Models\User;
+
 
 class TramiteController extends Controller
-{
 
+
+{
+    
     public function index()
     {
-        return view('tramites.index');
+        $users = User::all();
+        $colegiados = Colegiado::all();
+        $pagos = Pago::all();
+        $tramites = Tramite::all();
+        return view('tramites.index', compact('pagos','colegiados','users','tramites'));
+       // $colegiado->id = $request->get('id');
+      //  $colegiado = "holao";
+      //  return view('tramites.index');
+
     }
+
 
     public function create()
     {
         return view("tramites.creartrami");
     }
 
- 
     public function store(Request $request)
     {
       $tramites = new Tramite();
@@ -27,6 +41,8 @@ class TramiteController extends Controller
       $tramites->asunto = $request->input('asunto');
       $tramites->fecha_emi = $request->input('fecha_emi');
       $tramites->fecha_recep = $request->input('fecha_recep');
+      $tramites->archivo =$request->input('tipo_tramite_id');
+      //Tramite::insert($tramites)
    //   $tramites->colegiado_id = '7';
    //   $tramites->persona_id = '2';
       
@@ -43,9 +59,18 @@ class TramiteController extends Controller
      * @param  \App\Models\Tramite  $tramite
      * @return \Illuminate\Http\Response
      */
-    public function show(Tramite $tramite)
+    public function show()
     {
-        //
+        $users = User::all();
+        $colegiados = Colegiado::all();
+        $pagos = Pago::all();
+        $tramites = Tramite::all();
+        return view('tramites.mostrar', compact('pagos','colegiados','users','tramites'));
+     //   $tramites->tipo_tramite_id = $request->get('tipo_tramite_id');
+     //   $tramites->asunto = $request->get('asunto');
+      //  $tramites->fecha_emi = $request->get('fecha_emi');
+     //   $tramites->fecha_recep = $request->get('fecha_recep');
+     //   $tramites->archivo =$request->get('tipo_tramite_id');
     }
 
     /**

@@ -55,7 +55,7 @@ class PagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
