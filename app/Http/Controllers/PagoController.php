@@ -55,25 +55,7 @@ class PagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        //dd(request()->all());
-        //dd(Colegiado::where('dni',$request->dnia)->get()[0]->id);
-        $pago = new Pago;
-        $pago->numero = '2';
-        $pago->observaciones = $request->observaciones;
-
-        $pago->colegiado_id = Colegiado::where('dni',$request->dnia)->get()[0]->id;
-        $pago->sede_id = '1';
-        $pago->forma_pago_id ='1';
-        $pago->save();
-        $conceptopago = new ConceptoPago;
-        $conceptopago->cantidad='1';
-        $conceptopago->precio='100';
-        $conceptopago->pago_id=$pago->id;
-        $conceptopago->concepto_id=$request->concepto1;
-        $conceptopago->save();
-
-        return redirect()->route('caja.index');
+        
     }
 
     /**
