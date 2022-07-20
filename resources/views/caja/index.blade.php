@@ -13,34 +13,35 @@
         <div class="row justify-content-end">
             <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#staticBackdrop">Nueva Venta</button>
         </div>
-        <table id="caja" class="table table-striped mt-2">
-            <thead>
-                <th>Id</th>
-                <th>Numero</th>
-                {{-- <th>Obs</th> --}}
-                <th>Sede</th>
-                <th>Forma de Pago</th>
-                <th>Tipo de Persona</th>
-                <th>Nombres</th>
-            </thead>
-            <tbody>
-                @foreach ($pagos as $pago)
-                <tr>
-                    <td>{{ $pago->id }}</td>
-                    <td>{{ $pago->numero }}</td>
-                    {{-- <td>{{ $pago->observaciones }}</td> --}}
-                    <td>{{ $pago->sede->nombre  }}</td>
-                    <td>{{ $pago->forma_pago->nombre  }}</td>
-                    @if ($pago->persona_id)
-                        <td> <span class="badge bg-warning">Persona Natural</span></td>
-                    @else
-                    <td> <span class="badge bg-danger">Colegiado</span></td>
-                    @endif
-                    <td>{{ $pago->persona->nombres ?? $pago->colegiado->nombres ?? 'No Existe registro'}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table-responsive-md">
+            <table id="caja" class="table table-striped mt-2">
+                <thead>
+                    <th>Id</th>
+                    <th>Numero</th>
+                    <th>Sede</th>
+                    <th>Forma de Pago</th>
+                    <th>Tipo de Persona</th>
+                    <th>Nombres</th>
+                </thead>
+                <tbody>
+                    @foreach ($pagos as $pago)
+                    <tr>
+                        <td>{{ $pago->id }}</td>
+                        <td>{{ $pago->numero }}</td>
+                        <td>{{ $pago->sede->nombre  }}</td>
+                        <td>{{ $pago->forma_pago->nombre  }}</td>
+                        @if ($pago->persona_id)
+                            <td> <span class="badge bg-warning">Persona Natural</span></td>
+                        @else
+                        <td> <span class="badge bg-danger">Colegiado</span></td>
+                        @endif
+                        <td>{{ $pago->persona->nombres ?? $pago->colegiado->nombres ?? 'No Existe registro'}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
         {{-- <h2>Concepto Pago</h2>
         <p>Concepto: {{$conceptos2->nombre}}</p>
         <table id="caja" class="table table-striped mt-2">
@@ -178,7 +179,7 @@
                                 <select class="custom-select mb-2" name="concepto1" id="selectconcepto">
                                     <option selected>Seleccion concepto de pago</option>
                                     @foreach ($conceptos as $concepto)
-                                    <option value="1">{{$concepto->nombre}}     -   {{$concepto->precio}}</option>
+                                    <option value="{{$concepto->id}}">{{$concepto->nombre}}     -   {{$concepto->precio}}</option>
                                     @endforeach
                                 </select>
 
