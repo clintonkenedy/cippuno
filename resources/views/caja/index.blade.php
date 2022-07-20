@@ -41,8 +41,6 @@
                 @endforeach
             </tbody>
         </table>
-
-
         {{-- <h2>Concepto Pago</h2>
         <p>Concepto: {{$conceptos2->nombre}}</p>
         <table id="caja" class="table table-striped mt-2">
