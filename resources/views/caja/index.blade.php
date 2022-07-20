@@ -41,37 +41,6 @@
                 </tbody>
             </table>
         </div>
-
-        {{-- <h2>Concepto Pago</h2>
-        <p>Concepto: {{$conceptos2->nombre}}</p>
-        <table id="caja" class="table table-striped mt-2">
-            <thead>
-            <th>Id</th>
-            <th>Numero</th>
-            <th>Obs</th>
-            <th>Sede</th>
-            <th>Forma de Pago</th>
-            <th>Tipo de Persona</th>
-            <th>Nombres</th>
-            </thead>
-            <tbody>
-            @foreach ($conceptos2->pagos as $pago)
-                <tr>
-                    <td>{{ $pago->id }}</td>
-                    <td>{{ $pago->numero }}</td>
-                    <td>{{ $pago->observaciones }}</td>
-                    <td>{{ $pago->sede->nombre }}</td>
-                    <td>{{ $pago->forma_pago_id }}</td>
-                    @if ($pago->persona_id)
-                        <td> <span class="badge bg-warning">Persona Natural</span></td>
-                    @else
-                        <td> <span class="badge bg-danger">Colegiado</span></td>
-                    @endif
-                    <td>{{ $pago->persona->nombres ?? $pago->colegiado->nombres ?? 'No Existe registro'}}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table> --}}
     </div>
 
     <!-- Modal -->
@@ -175,16 +144,18 @@
                             <span style="color: red;">*</span>
                         </label>
                         <div class="row">
-                            <div class="col-10" id="divconceptos">
-                                <select class="custom-select mb-2" name="concepto1" id="selectconcepto">
+                            <div class="col-8" id="divconceptos">
+                                <select class="custom-select mb-2" name="concepto1" id="selectconcepto" onchange="prueba(this)">
                                     <option selected>Seleccion concepto de pago</option>
                                     @foreach ($conceptos as $concepto)
-                                    <option value="{{$concepto->id}}">{{$concepto->nombre}}     -   {{$concepto->precio}}</option>
+                                    <option value="{{$concepto->precio}}">{{$concepto->nombre}}</option>
                                     @endforeach
                                 </select>
-
                             </div>
-                            <div class="col-2">
+                            <div class="col">
+                                <input type="text" id="precioconcepto" class="form-control" readonly value="">
+                            </div>
+                            <div class="col">
                                 <button class="btn btn-warning float-right" type="button" onclick="addConcepto()">Agregar</button>
                             </div>
                         </div>
@@ -209,8 +180,13 @@
     <script> console.log('Hi!'); </script>
     <script type="text/javascript">
         // const dni = document.getElementById("dni").value;
-
+        const prueba = (concepto, idInput) => {
+            console.log(concepto.value);
+            const precio = document.getElementById(idInput);
+            precio.value = concepto.value;
+        }
         const buscar = async ( dni ) => {
+            event.preventDefault();
             const apaterno = document.getElementById('apaterno');
             const amaterno = document.getElementById('amaterno');
             const nombres = document.getElementById('nombres');
