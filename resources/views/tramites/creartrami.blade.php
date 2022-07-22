@@ -15,6 +15,8 @@
   @csrf
   <label for="">Tipo de tramite</label>
   <input id="tipo_tramite_id" type="number"name="tipo_tramite_id" placeholder="tipo de tramite"><br>
+  <label for="">Id colegiado</label>
+  <input id="tipo_tramite_id" type="number"name="colegiado_id" placeholder="Id de colegiado"><br>
   <label for="">Asunto</label>
   <input id="asunto" class="form-label" name="asunto" placeholder="asunto"><br>
   <label for="">Fecha Emision</label>

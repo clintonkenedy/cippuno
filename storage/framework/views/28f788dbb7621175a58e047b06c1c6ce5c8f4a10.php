@@ -83,7 +83,7 @@
         </div>
 		</form>
       </div>
-      <table id="caja" class="table table-striped mt-2">
+      <table id="tabla" class="table table-striped mt-2">
             <thead>
                 <th>Id</th>
                 <th>asunto</th>

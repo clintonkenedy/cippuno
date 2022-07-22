@@ -57,7 +57,7 @@
             </button>
             </div>
             <div class="modal-body">
-                <form id="crearPago" name="crearPago" class=""  url="javascript:void(0)" method="POST">
+                <form action="<?php echo e(route('caja.store')); ?>" id="crearPago" name="crearPago" class=""  url="javascript:void(0)" method="POST">
                 <input type="hidden" name="_token" id="token" value="<?php echo e(csrf_token()); ?>">
                 <div class="row">
                     <div class="col-md-12 mb-3">
@@ -68,6 +68,7 @@
                         <div class="input-group">
                             
                             <input type="text" class="form-control xd" placeholder="Ingrese DNI" aria-label="Ingrese DNI" id="dni">
+                            <input type="text" name="dnia" id="dnia" class="form-control" hidden>
                             <div class="input-group-append">
                             <button class="btn btn-primary" type="button" id="buscarDNI" onclick="buscar(dni)">Buscar</button>
                             </div>
@@ -120,7 +121,7 @@
                         </label>
                         
                         
-                        <textarea name="" id="" class="form-control" placeholder="Ingrese Observaciones"></textarea>
+                        <textarea type="text" name="observaciones" id="observaciones" class="form-control" placeholder="Ingrese Observaciones"></textarea>
                         
                         <div id="errorEvento" class=""></div>
                     </div>
@@ -146,12 +147,13 @@
 
                     </div>
                 </div>
-                </form>
-    </div>
+
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
+            </form>
         </div>
         </div>
     </div>
@@ -168,9 +170,10 @@
             const apaterno = document.getElementById('apaterno');
             const amaterno = document.getElementById('amaterno');
             const nombres = document.getElementById('nombres');
+            const dnia1 = document.getElementById('dnia');
             if (dni.value.toString().length != 8) return //VALIDACION SIMPLE PARA DNI
 
-            const resp = await fetch(`http://127.0.0.1:8000/buscar/${dni.value}`); //BUSCA EN LA TABLA COLEGIADOS
+            const resp = await fetch(`/buscar/${dni.value}`); //BUSCA EN LA TABLA COLEGIADOS
 
             const {status, data} = await resp.json(); //DESESTRUCTURACION DE RESPUESTA
 
@@ -179,6 +182,7 @@
                 apaterno.value = data.a_paterno;
                 amaterno.value = data.a_materno;
                 nombres.value = data.nombres;
+                dnia1.value = data.dni;
                 //ESTILOS
                 document.getElementById('noEncontrado').hidden = true;
                 if(dni.classList.contains('is-invalid')){

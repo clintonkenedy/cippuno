@@ -37,7 +37,10 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('/tramites.requisitos', function () {
         return view('tramites.requisitos'); //REQUISITOS DE TRAMITES.
     })->name('tramites.requisitos');
-
+    Route::get('/tramites.oficinas', function () {
+        return view('tramites.oficinas'); //REQUISITOS DE TRAMITES.
+    })->name('tramites.oficinas');
+    Route::get('/tramites.oficinas', [TramiteController::class,'ofic'])->name('tramites.oficinas');
 
 
     //RUTAS PARA CERTIFICADOS

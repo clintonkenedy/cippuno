@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Colegiado;
 use App\Models\Pago;
 use App\Models\User;
+use App\Models\Oficina;
 
 
 class TramiteController extends Controller
@@ -20,7 +21,8 @@ class TramiteController extends Controller
         $colegiados = Colegiado::all();
         $pagos = Pago::all();
         $tramites = Tramite::all();
-        return view('tramites.index', compact('pagos','colegiados','users','tramites'));
+        $oficinas = Oficina::all();
+        return view('tramites.index', compact('pagos','colegiados','users','tramites','oficinas'));
        // $colegiado->id = $request->get('id');
       //  $colegiado = "holao";
       //  return view('tramites.index');
@@ -33,6 +35,15 @@ class TramiteController extends Controller
         return view("tramites.creartrami");
     }
 
+    public function ofic()
+    {
+        $users = User::all();
+        $colegiados = Colegiado::all();
+        $pagos = Pago::all();
+        $tramites = Tramite::all();
+        $oficinas = Oficina::all();
+        return view('tramites.oficinas', compact('pagos','colegiados','users','tramites','oficinas'));
+    }
     public function store(Request $request)
     {
       $tramites = new Tramite();
@@ -43,7 +54,7 @@ class TramiteController extends Controller
       $tramites->fecha_recep = $request->input('fecha_recep');
       $tramites->archivo =$request->input('tipo_tramite_id');
       //Tramite::insert($tramites)
-   //   $tramites->colegiado_id = '7';
+      $tramites->colegiado_id = $request->get('colegiado_id');'';
    //   $tramites->persona_id = '2';
       
       //dd($tramites);
