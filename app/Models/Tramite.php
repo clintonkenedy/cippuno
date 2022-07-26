@@ -20,4 +20,7 @@ class Tramite extends Model
     public function persona(){
         return $this->belongsTo(Persona::class);
     }
+    public function tipo_tramite(){
+        return $this->belongsTo(Tipo_tramite::class);
+    }
 }

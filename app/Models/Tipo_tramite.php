@@ -16,4 +16,7 @@ class Tipo_tramite extends Model
     public function requisitos(){
         return $this->belongsToMany(Requisito::class);
     }
+    public function tipo_tramite(){
+        return $this->belongsTo(Tipo_tramite::class);
+    }
 }

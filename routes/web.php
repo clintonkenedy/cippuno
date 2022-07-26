@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\TramiteController; 
+use App\Http\Controllers\TipoTramiteController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,7 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('/buscar/{dni}', [ColegiadoController::class,'buscardni'])->name('colegiado.buscar');
     //Route::get(Tramite)
     Route::resource('tramites',TramiteController::class);
+    Route::resource('tipotramites',TipoTramiteController::class);
     Route::get('/tramites.crear', function () {
         return view('tramites.creartrami'); //REDERIZA VISTA
     })->name('tramites.creartrami');

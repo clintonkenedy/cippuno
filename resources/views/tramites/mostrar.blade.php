@@ -40,7 +40,7 @@
 
       
 
-        <table id="caja" class="table table-striped mt-2">
+        <table id="caja" class="table table-dark table-striped">
             <thead>
             </thead>
             <tbody>
@@ -56,19 +56,22 @@
                     <tbody>
                       <tr>
                         <td class='col-md-3'>Nombres y Apellidos: </td>
-                        <td><input type="text"  name="nombre_apellido" value="{{ $colegiado->nombres }}"></td>
+                        <td><input type="text"  name="nombre_apellido" value="{{ $colegiado->nombres }}"disabled></td>
                       </tr>
                       <tr>
                         <td>Dni:</td>
-                        <td><input type="text"  name="dni" value="{{ $colegiado->dni }}" ></td>
+                        <td><input type="text"  name="dni" value="{{ $colegiado->dni }}"disabled ></td>
                       </tr>
 
 
 					  <tr>
                         <td>Ciudad:</td>
-                        <td><input type="text"  name="ciudad" value="{{ $colegiado->direccion }}"></td>
+                        <td><input type="text"  name="ciudad" value="{{ $colegiado->direccion }}"disabled></td>
                       </tr>       
-                     
+                      <tr>
+                        <td>capitulo Id:</td>
+                        <td><input type="text"  name="ciudad" value="{{ $colegiado->capitulo->nombre }}"disabled></td>
+                      </tr>   
                     </tbody>
                   </table>
                   
@@ -83,24 +86,43 @@
         </div>
 		</form>
       </div>
-      <table id="tabla" class="table table-striped mt-2">
+
+      <table id="tabla" class="table table-dark table-striped">
             <thead>
+              
                 <th>Id</th>
                 <th>asunto</th>
                 <th>fecha emision</th>
                 <th>fecha recepcion</th>
                 <th>Tipo de tramite</th>
+                <th>Archivo 1</th>
+                <th>Archivo 2</th>
+                <th>Archivo 3</th>
+                <th>Archivo 4</th>
+                
             </thead>
             <tbody>
                 @foreach ($tramites as $tramite)
+              
                 <tr>
                     <td>{{ $tramite->id }}</td>
                     <td>{{ $tramite->asunto }}</td>
                     <td>{{ $tramite->fecha_emi }}</td>
                     <td>{{ $tramite->fecha_recep  }}</td>
-                    <td>{{ $tramite->tipo_tramite_id }}</td>
-                </tr>
+                    <td>{{ $tramite->tipo_tramite->nombre  }}</td>
+                    <td>{{ $tramite->archivo_1  }}</td>
+                    <td>{{ $tramite->archivo_2   }}</td>
+                    <td>{{ $tramite->archivo_3   }}</td>
+                    <td>{{ $tramite->archivo_4   }}</td>
+               </tr>
+                @foreach ($tipo_tramites as $nombres )
                 @endforeach
+                
+                @endforeach
+
+                
+  
+                
             </tbody>
         </table>
 @stop
