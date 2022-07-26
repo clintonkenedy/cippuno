@@ -143,17 +143,15 @@
                             Concepto de Pago:
                             <span style="color: red;">*</span>
                         </label>
-                        <div class="row">
-                            <div class="col-8" id="divconceptos">
-                                <select class="custom-select mb-2" name="concepto1" id="selectconcepto" onchange="prueba(this)">
+                        <div class="row" id="divpagos">
+                            <div class="col-9 input-group" id="divconceptos1" onchange="prueba(this)">
+                                <select class="custom-select mb-2" name="concepto1">
                                     <option selected>Seleccion concepto de pago</option>
                                     @foreach ($conceptos as $concepto)
                                     <option value="{{$concepto->precio}}">{{$concepto->nombre}}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="col">
-                                <input type="text" id="precioconcepto" class="form-control" readonly value="">
+                                <input type="text" class="col-2 form-control" readonly>
                             </div>
                             <div class="col">
                                 <button class="btn btn-warning float-right" type="button" onclick="addConcepto()">Agregar</button>
@@ -180,10 +178,13 @@
     <script> console.log('Hi!'); </script>
     <script type="text/javascript">
         // const dni = document.getElementById("dni").value;
-        const prueba = (concepto, idInput) => {
-            console.log(concepto.value);
-            const precio = document.getElementById(idInput);
-            precio.value = concepto.value;
+        const prueba = (concepto) => {
+            const sel = concepto.getElementsByTagName('select');
+            const precio = concepto.getElementsByTagName('input');
+            // console.log(precio.item(0));
+            // const precio = document.getElementById("precioconcepto");
+            // console.log(sel.item(0).value);
+            precio.item(0).value = sel.item(0).value;
         }
         const buscar = async ( dni ) => {
             event.preventDefault();
@@ -231,20 +232,23 @@
 
         var i = 2 //CONTADOR
         const addConcepto = () => {
-            // const concepto = document.createElement("select");
-            // const clase = document.createAttribute("class");
-            // clase.value = "custom-select";
-
-            const concepto = document.getElementById("selectconcepto");
-            const clon = concepto.cloneNode(true);
-            clon.setAttribute('name','concepto'+i);
-            const divconcepto = document.getElementById("divconceptos");
+            const div = document.getElementById("divconceptos1");
+            const clon = div.cloneNode(true);
+            clon.setAttribute('id', 'divconceptos'+i)
+            const sel = clon.getElementsByTagName("select").item(0);
+            sel.setAttribute('name','concepto'+i);
+            const inp = clon.getElementsByTagName("input").item(0);
+            inp.value = '';
+            console.log(inp);
+            const divconcepto = document.getElementById("divpagos");
             // const aux = concepto;
             // console.log(divconcepto);
+            // console.log(divconcepto);
+            // console.log(clon.getElementsByTagName('input'));
+
             divconcepto.appendChild(clon);
             i++;
         }
-
         $(document).ready( function () {
             $('#caja').DataTable();
         } );
