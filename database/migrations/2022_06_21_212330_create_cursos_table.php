@@ -16,6 +16,7 @@ class CreateCursosTable extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',60);
+            $table->text('enlace');
             $table->float('precio');
             $table->string('duracion',50);
             $table->date('fecha_inicio');
@@ -23,7 +24,7 @@ class CreateCursosTable extends Migration
             $table->text('temario');
             $table->text('ponentes');
             $table->string('modelo_certificado');
-            $table->enum('estado',[0,1]);
+            $table->enum('estado',[0,1,2,3,4]);
             $table->timestamps();
         });
     }
