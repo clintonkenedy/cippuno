@@ -3,6 +3,11 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+<script>
+    const conceptos = @json($conceptos);
+    // console.log(oficinas);
+    // console.log(eventos);
+    </script>
 @stop
 
 @section('content')
@@ -11,71 +16,41 @@
             <h1>CAJA CIP PUNO</h1>
         </div>
         <div class="row justify-content-end">
-            <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#staticBackdrop">Nueva Venta</button>
+            <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#staticBackdrop">Nueva Pago</button>
         </div>
-        <table id="caja" class="table table-striped mt-2">
-            <thead>
-                <th>Id</th>
-                <th>Numero</th>
-                {{-- <th>Obs</th> --}}
-                <th>Sede</th>
-                <th>Forma de Pago</th>
-                <th>Tipo de Persona</th>
-                <th>Nombres</th>
-            </thead>
-            <tbody>
-                @foreach ($pagos as $pago)
-                <tr>
-                    <td>{{ $pago->id }}</td>
-                    <td>{{ $pago->numero }}</td>
-                    {{-- <td>{{ $pago->observaciones }}</td> --}}
-                    <td>{{ $pago->sede->nombre  }}</td>
-                    <td>{{ $pago->forma_pago->nombre  }}</td>
-                    @if ($pago->persona_id)
-                        <td> <span class="badge bg-warning">Persona Natural</span></td>
-                    @else
-                    <td> <span class="badge bg-danger">Colegiado</span></td>
-                    @endif
-                    <td>{{ $pago->persona->nombres ?? $pago->colegiado->nombres ?? 'No Existe registro'}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        {{-- <h2>Concepto Pago</h2>
-        <p>Concepto: {{$conceptos2->nombre}}</p>
-        <table id="caja" class="table table-striped mt-2">
-            <thead>
-            <th>Id</th>
-            <th>Numero</th>
-            <th>Obs</th>
-            <th>Sede</th>
-            <th>Forma de Pago</th>
-            <th>Tipo de Persona</th>
-            <th>Nombres</th>
-            </thead>
-            <tbody>
-            @foreach ($conceptos2->pagos as $pago)
-                <tr>
-                    <td>{{ $pago->id }}</td>
-                    <td>{{ $pago->numero }}</td>
-                    <td>{{ $pago->observaciones }}</td>
-                    <td>{{ $pago->sede->nombre }}</td>
-                    <td>{{ $pago->forma_pago_id }}</td>
-                    @if ($pago->persona_id)
-                        <td> <span class="badge bg-warning">Persona Natural</span></td>
-                    @else
+        <div class="table-responsive-md">
+            <table id="caja" class="table table-striped mt-2">
+                <thead>
+                    <th>Id</th>
+                    <th>Numero</th>
+                    <th>Sede</th>
+                    <th>Forma de Pago</th>
+                    <th>Tipo de Persona</th>
+                    <th>Nombres</th>
+                </thead>
+                <tbody>
+                    @foreach ($pagos as $pago)
+                    <tr>
+                        <td>{{ $pago->id }}</td>
+                        <td>{{ $pago->numero }}</td>
+                        <td>{{ $pago->sede->nombre  }}</td>
+                        <td>{{ $pago->forma_pago->nombre  }}</td>
+                        @if ($pago->persona_id)
+                            <td> <span class="badge bg-warning">Persona Natural</span></td>
+                        @else
                         <td> <span class="badge bg-danger">Colegiado</span></td>
-                    @endif
-                    <td>{{ $pago->persona->nombres ?? $pago->colegiado->nombres ?? 'No Existe registro'}}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table> --}}
+                        @endif
+                        <td>{{ $pago->persona->nombres ?? $pago->colegiado->nombres ?? 'No Existe registro'}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">NUEVO PAGO</h5>
@@ -128,13 +103,7 @@
                             Apellido Materno:
                         <span style="color: red;">*</span>
                         </label>
-                        {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
                         <input type="text" name="amaterno" id="amaterno" class="form-control" readonly>
-                        {{-- @error('evento')
-                    <span class="invalid-feedback">
-                        <strong> {{$message}} </strong>
-                    </span>
-                    @enderror --}}
                         <div id="errorEvento" class=""></div>
                     </div>
 
@@ -143,13 +112,7 @@
                             Nombres:
                         <span style="color: red;">*</span>
                         </label>
-                        {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
                         <input type="text" name="nombres" id="nombres" class="form-control" readonly>
-                        {{-- @error('evento')
-                    <span class="invalid-feedback">
-                        <strong> {{$message}} </strong>
-                    </span>
-                    @enderror --}}
                         <div id="errorEvento" class=""></div>
                     </div>
 
@@ -158,8 +121,6 @@
                             Observaciones:
                         <span style="color: red;">*</span>
                         </label>
-                        {{-- {!! Form::text('evento',null,array('id'=>'evento', 'class'=>'form-control '.($errors->has('evento') ? 'is-invalid':''), 'onkeyup'=>'validarEvento()','onblur'=>'validarEvento()')) !!} --}}
-                        {{-- <input type="text" name="" id="" class="form-control"> --}}
                         <textarea type="text" name="observaciones" id="observaciones" class="form-control" placeholder="Ingrese Observaciones"></textarea>
                         {{-- @error('evento')
                     <span class="invalid-feedback">
@@ -173,17 +134,20 @@
                             Concepto de Pago:
                             <span style="color: red;">*</span>
                         </label>
-                        <div class="row">
-                            <div class="col-10" id="divconceptos">
-                                <select class="custom-select mb-2" name="concepto1" id="selectconcepto">
-                                    <option selected>Seleccion concepto de pago</option>
+                        <div class="row" id="divpagos">
+                            <div class="col-9 input-group" id="divconceptos1" onchange="cambioPago(this)">
+                                <select class="col-9 custom-select mb-2" name="concepto[]">
+                                    <option value="-1" selected>Selección concepto de pago</option>
                                     @foreach ($conceptos as $concepto)
-                                    <option value="1">{{$concepto->nombre}}     -   {{$concepto->precio}}</option>
+                                    <option value="{{$concepto->id - 1}}">{{$concepto->nombre}}</option>
                                     @endforeach
                                 </select>
-
+                                <input type="text" class="col-2 form-control" readonly>
+                                <button type="button" class="col-1 close form-control" aria-label="Close" onclick="prueba(this)">
+                                    <span aria-hidden="true" class="text-danger">&times;</span>
+                                </button>
                             </div>
-                            <div class="col-2">
+                            <div class="col">
                                 <button class="btn btn-warning float-right" type="button" onclick="addConcepto()">Agregar</button>
                             </div>
                         </div>
@@ -208,8 +172,23 @@
     <script> console.log('Hi!'); </script>
     <script type="text/javascript">
         // const dni = document.getElementById("dni").value;
+        const cambioPago = (concepto) => {
+            const sel = concepto.getElementsByTagName('select');
+            const idconcepto = sel.item(0).value;
+            const precio = concepto.getElementsByTagName('input');
+            // // console.log(precio.item(0));
+            // // const precio = document.getElementById("precioconcepto");
+            // console.log(sel.item(0).value);
+            if (idconcepto != -1) {
+                precio.item(0).value = conceptos[idconcepto].precio;
+            }
+            else{
+                precio.item(0).value = '...'
+            }
 
+        }
         const buscar = async ( dni ) => {
+            event.preventDefault();
             const apaterno = document.getElementById('apaterno');
             const amaterno = document.getElementById('amaterno');
             const nombres = document.getElementById('nombres');
@@ -252,20 +231,40 @@
             }
         };
 
+        const prueba = (concepto) => {
+            concepto.parentNode.remove();
+            console.log(concepto.parentNode);
+        };
+
         var i = 2 //CONTADOR
         const addConcepto = () => {
-            // const concepto = document.createElement("select");
-            // const clase = document.createAttribute("class");
-            // clase.value = "custom-select";
-
-            const concepto = document.getElementById("selectconcepto");
-            const clon = concepto.cloneNode(true);
-            clon.setAttribute('name','concepto'+i);
-            const divconcepto = document.getElementById("divconceptos");
+            const div = document.getElementById("divconceptos1");
+            const clon = div.cloneNode(true);
+            clon.setAttribute('id', 'divconceptos'+i)
+            const sel = clon.getElementsByTagName("select").item(0);
+            sel.setAttribute('name','concepto[]');
+            const inp = clon.getElementsByTagName("input").item(0);
+            inp.value = '';
+            // console.log(inp);
+            const divconcepto = document.getElementById("divpagos");
             // const aux = concepto;
             // console.log(divconcepto);
+            // console.log(divconcepto);
+            // console.log(clon.getElementsByTagName('input'));
+
             divconcepto.appendChild(clon);
             i++;
+        }
+
+        const enviarData = async () => {
+            event.preventDefault();
+            const formpagos = document.forms.crearPago;
+            const formData = new FormData(formpagos);
+            // console.log(formData.get('apaterno'));
+            console.log(formData.apaterno);
+            // for (const value of formData.values()) {
+            //     console.log(value);
+            // }
         }
 
         $(document).ready( function () {
