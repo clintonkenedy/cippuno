@@ -19,4 +19,16 @@ class Tipo_tramite extends Model
     public function tipo_tramite(){
         return $this->belongsTo(Tipo_tramite::class);
     }
+    static $rules = [
+		'nombre' => 'required',
+    ];
+
+    protected $perPage = 20;
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['nombre'];
 }

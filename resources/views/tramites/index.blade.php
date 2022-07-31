@@ -82,7 +82,34 @@
         </a>
         
       </div>
+      <div class="col">
+        <a href="tipo-tramite">
+          <div class="card card-cover h-100 overflow-hidden text-white bg-red rounded-4 shadow-lg">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Tipos de Tramite</h2>
+              <ul class="d-flex list-unstyled mt-auto">
+                </li>
+              </ul>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      <div class="col">
+        <a href="oficinas">
+          <div class="card card-cover h-100 overflow-hidden text-white bg-yellow rounded-4 shadow-lg" >
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Oficinas</h2>
+              <ul class="d-flex list-unstyled mt-auto">
+                </li>
+              </ul>
+            </div>
+          </div>
+        </a>
+        
+      </div>
     </div>
+    
 @stop
 @section('css')
 @stop
