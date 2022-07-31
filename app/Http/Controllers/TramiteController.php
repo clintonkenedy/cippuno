@@ -76,7 +76,42 @@ class TramiteController extends Controller
       return redirect()->route("tramites.index")->with("success", "Agregado con exito!");
       print_r($_POST);
     }
+    public function crecole(Request $request)
+    {
+      
+      $colegiados = new Colegiado();
 
+      $colegiados->nombres = $request->input('nombres');
+      $colegiados->codigo_colegiado = $request->input('codigo_colegiado');
+      $colegiados->dni = $request->input('dni');
+      $colegiados->a_paterno = $request->input('a_paterno');
+      $colegiados->a_materno = $request->input('a_materno');
+      $colegiados->direccion = $request->input('direccion');
+      $colegiados->capitulo_id = $request->get('capitulo_id');
+      $colegiados->ultimo_pago = $request->input('ultimo_pago');
+      
+      $colegiados->save();
+
+      return redirect()->route("tramites.index")->with("success", "Agregado con exito!");
+      print_r($_POST);
+    }
+    public function creperso(Request $request)
+    {
+      
+      $persona = new Persona();
+
+      $persona->dni = $request->input('dni');
+      $persona->nombres = $request->input('nombres');
+      $persona->a_paterno = $request->input('a_paterno');
+      $persona->a_materno = $request->input('a_materno');
+      $persona->email = $request->input('email');
+      $persona->direccion = $request->input('direccion');
+
+      $persona->save();
+
+      return redirect()->route("tramites.index")->with("success", "Agregado con exito!");
+      
+    }
     /**
      * Display the specified resource.
      *

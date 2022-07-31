@@ -42,23 +42,38 @@
         </a>
         
       </div>
+     
       <div class="col">
-        <a href="tramites.requisitos">
-          <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg" >
+        <a href="tramites.oficinas">
+          <div class="card card-cover h-100 overflow-hidden text-white bg-green rounded-4 shadow-lg" >
             <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Como crear un tramite?</h2>
+              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Vista Administrador</h2>
               <ul class="d-flex list-unstyled mt-auto">
                 </li>
               </ul>
             </div>
-          </div> </a>
-        </div>
+          </div>
+        </a>
+        
       </div>
       <div class="col">
-        <a href="tramites.oficinas">
-          <div class="card card-cover h-100 overflow-hidden text-white bg-yellow rounded-4 shadow-lg" >
+        <a href="tramites.crearcole">
+          <div class="card card-cover h-100 overflow-hidden text-white bg-blue rounded-4 shadow-lg" >
             <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Vista Administrador</h2>
+              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Agregar Colegiado</h2>
+              <ul class="d-flex list-unstyled mt-auto">
+                </li>
+              </ul>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+      <div class="col">
+        <a href="tramites.crearperso">
+          <div class="card card-cover h-100 overflow-hidden text-white bg-orange rounded-4 shadow-lg" >
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Agregar Persona</h2>
               <ul class="d-flex list-unstyled mt-auto">
                 </li>
               </ul>

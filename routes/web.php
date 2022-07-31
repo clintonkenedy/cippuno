@@ -43,6 +43,14 @@ Route::group(['middleware'=>['auth']],function (){
         return view('tramites.oficinas'); //REQUISITOS DE TRAMITES.
     })->name('tramites.oficinas');
     Route::get('/tramites.oficinas', [TramiteController::class,'ofic'])->name('tramites.oficinas');
+    Route::post('/tramites.crearcole', [TramiteController::class,'crecole'])->name('tramites.crearcole');
+    Route::post('/tramites.crearperso', [TramiteController::class,'creperso'])->name('tramites.crearperso');
+    Route::get('/tramites.crearperso', function () {
+        return view('tramites.crearperso'); //REDERIZA VISTA
+    })->name('tramites.crearperso');
+    Route::get('/tramites.crearcole', function () {
+        return view('tramites.crearcole'); //REDERIZA VISTA
+    })->name('tramites.crearcole');
 
 
     //RUTAS PARA CERTIFICADOS
