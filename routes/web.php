@@ -6,6 +6,7 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\TramiteController; 
 use App\Http\Controllers\TipoTramiteController; 
 use App\Http\Controllers\OficinaController; 
+use App\Http\Controllers\SeguimientoController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +45,7 @@ Route::group(['middleware'=>['auth']],function (){
         return view('tramites.oficinas'); //REQUISITOS DE TRAMITES.
     })->name('tramites.oficinas');
     Route::get('/tramites.oficinas', [TramiteController::class,'ofic'])->name('tramites.oficinas');
+    
     Route::post('/tramites.crearcole', [TramiteController::class,'crecole'])->name('tramites.crearcole');
     Route::post('/tramites.crearperso', [TramiteController::class,'creperso'])->name('tramites.crearperso');
     Route::get('/tramites.crearperso', function () {
@@ -54,6 +56,9 @@ Route::group(['middleware'=>['auth']],function (){
     })->name('tramites.crearcole');
     //RUTA DE OFICINA
     Route::resource('oficinas',OficinaController::class);
+    //RUTA DE SEGUIMIENTO
+    Route::resource('seguimientos',SeguimientoController::class);
+
    
 
 

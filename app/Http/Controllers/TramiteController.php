@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Oficina;
 use App\Models\Tipo_tramite;
 use App\Models\Persona;
+use App\Models\Seguimiento;
 
 class TramiteController extends Controller
 
