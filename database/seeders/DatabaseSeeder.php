@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
         Requisito::factory(10)->create();
         Tipo_tramite::factory(5)->create();
         Sede::factory(8)->create();
-        Forma_pago::factory(4)->create();
+        $this->call(Forma_pagoSeeder::class);
+        // Forma_pago::factory(4)->create();
         Persona::factory(10)->create();
         Pago::factory(10)->create();
         ConceptoPago::factory(20)->create();

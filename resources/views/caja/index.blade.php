@@ -26,7 +26,7 @@
                     <th>Sede</th>
                     <th>Forma de Pago</th>
                     <th>Tipo de Persona</th>
-                    <th>Nombres</th>
+                    <th>Apellidos</th>
                 </thead>
                 <tbody>
                     @foreach ($pagos as $pago)
@@ -40,7 +40,7 @@
                         @else
                         <td> <span class="badge bg-danger">Colegiado</span></td>
                         @endif
-                        <td>{{ $pago->persona->nombres ?? $pago->colegiado->nombres ?? 'No Existe registro'}}</td>
+                        <td>{{ $pago->persona->a_paterno ?? ($pago->colegiado->a_paterno." ".$pago->colegiado->a_materno) ?? 'No Existe registro'}}</td>
                     </tr>
                     @endforeach
                 </tbody>
