@@ -75,7 +75,7 @@ class PagoController extends Controller
                 $conceptopago->cantidad='1';
                 $conceptopago->precio='100';
                 $conceptopago->pago_id=$pago->id;
-                $conceptopago->concepto_id=$request->concepto[$i]+1;
+                $conceptopago->concepto_id=$request->concepto[$i];
             }
         }
         else {
@@ -83,7 +83,7 @@ class PagoController extends Controller
             $conceptopago->cantidad='1';
             $conceptopago->precio='100';
             $conceptopago->pago_id=$pago->id;
-            $conceptopago->concepto_id=$request->concepto[0]+1;
+            $conceptopago->concepto_id=$request->concepto[0];
         }
         $conceptopago->save();
 
