@@ -3,14 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\PagoController;
-<<<<<<< HEAD
 use App\Http\Controllers\TramiteController; 
 use App\Http\Controllers\TipoTramiteController; 
 use App\Http\Controllers\OficinaController; 
 use App\Http\Controllers\SeguimientoController; 
-=======
-
->>>>>>> 25a4b92424a1a12dc1040e5b60d8711e3de242b8
+use App\Http\Controllers\ConceptoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,8 +30,13 @@ Route::group(['middleware'=>['auth']],function (){
     //RUTAS PARA TRAMITES
     Route::resource('colegiado',ColegiadoController::class);
     Route::resource('caja', PagoController::class);
+    Route::get('/concepto', [ConceptoController::class,'index'])->name('conceptos.index');
+    Route::get('/concepto/edit/{id}', [ConceptoController::class,'edit'])->name('conceptos.edit');
+    Route::put('/concepto/update/{id}', [ConceptoController::class,'update'])->name('conceptos.update');
+    Route::post('/nuevoconcepto', [ConceptoController::class,'store'])->name('conceptos.store');
+    Route::delete('/concepto/destroy/{id}', [ConceptoController::class,'destroy'])->name('conceptos.destroy');
     Route::get('/buscar/{dni}', [ColegiadoController::class,'buscardni'])->name('colegiado.buscar');
-<<<<<<< HEAD
+
     //Route::get(Tramite)
     Route::resource('tramites',TramiteController::class);
     Route::resource('tipo-tramite',TipoTramiteController::class);
@@ -65,8 +67,6 @@ Route::group(['middleware'=>['auth']],function (){
     Route::resource('seguimientos',SeguimientoController::class);
 
    
-=======
->>>>>>> 25a4b92424a1a12dc1040e5b60d8711e3de242b8
 
     Route::get('/tramites', function () {
         return view('tramites.index'); //REDERIZA VISTA
