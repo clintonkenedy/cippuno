@@ -28,7 +28,7 @@
     <option value="2">Certificado Habilidad</option>
     <option value="3">Duplicado de Carnet</option>
     <option value="4">Cambio de Sede</option>
-    <option value="5">Certificado obras Publicas</option>
+    <option value="5">Certificado Obras Publicas</option>
   </select>
 </div>
 
