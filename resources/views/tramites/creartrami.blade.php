@@ -24,11 +24,11 @@
   <div class="form-floating">
   <select class="form-select" id="tipo_tramite_id" name="tipo_tramite_id" aria-label="Floating label select example">
     <option selected>Opciones de Tramites</option>
-    <option value="1">repellat</option>
-    <option value="2">voluptate</option>
-    <option value="3">ratione</option>
-    <option value="4">esse</option>
-    <option value="5">sunt</option>
+    <option value="1">Colegiatura</option>
+    <option value="2">Certificado Habilidad</option>
+    <option value="3">Duplicado de Carnet</option>
+    <option value="4">Cambio de Sede</option>
+    <option value="5">Certificado obras Publicas</option>
   </select>
 </div>
 
