@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tramite;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use App\Models\Colegiado;
 use App\Models\Pago;
 use App\Models\User;
@@ -11,14 +12,19 @@ use App\Models\Oficina;
 use App\Models\Tipo_tramite;
 use App\Models\Persona;
 use App\Models\Seguimiento;
+=======
+>>>>>>> 25a4b92424a1a12dc1040e5b60d8711e3de242b8
 
 class TramiteController extends Controller
-
-
 {
-    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
+<<<<<<< HEAD
         $users = User::all();
         $colegiados = Colegiado::all();
         $pagos = Pago::all();
@@ -31,14 +37,22 @@ class TramiteController extends Controller
       //  $colegiado = "holao";
       //  return view('tramites.index');
 
+=======
+        return view('tramites.prueba');
+>>>>>>> 25a4b92424a1a12dc1040e5b60d8711e3de242b8
     }
 
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view("tramites.creartrami");
+        //
     }
 
+<<<<<<< HEAD
     public function ofic()
     {
         $users = User::all();
@@ -76,6 +90,17 @@ class TramiteController extends Controller
 
       return redirect()->route("tramites.index")->with("success", "Agregado con exito!");
       print_r($_POST);
+=======
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+>>>>>>> 25a4b92424a1a12dc1040e5b60d8711e3de242b8
     }
     public function crecole(Request $request)
     {
@@ -119,8 +144,9 @@ class TramiteController extends Controller
      * @param  \App\Models\Tramite  $tramite
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Tramite $tramite)
     {
+<<<<<<< HEAD
         $users = User::all();
         $colegiados = Colegiado::all();
         $pagos = Pago::all();
@@ -133,6 +159,9 @@ class TramiteController extends Controller
       //  $tramites->fecha_emi = $request->get('fecha_emi');
      //   $tramites->fecha_recep = $request->get('fecha_recep');
      //   $tramites->archivo =$request->get('tipo_tramite_id');
+=======
+        //
+>>>>>>> 25a4b92424a1a12dc1040e5b60d8711e3de242b8
     }
 
     /**

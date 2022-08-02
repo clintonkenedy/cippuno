@@ -1,12 +1,16 @@
-<?php 
+<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\PagoController;
+<<<<<<< HEAD
 use App\Http\Controllers\TramiteController; 
 use App\Http\Controllers\TipoTramiteController; 
 use App\Http\Controllers\OficinaController; 
 use App\Http\Controllers\SeguimientoController; 
+=======
+
+>>>>>>> 25a4b92424a1a12dc1040e5b60d8711e3de242b8
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +34,7 @@ Route::group(['middleware'=>['auth']],function (){
     Route::resource('colegiado',ColegiadoController::class);
     Route::resource('caja', PagoController::class);
     Route::get('/buscar/{dni}', [ColegiadoController::class,'buscardni'])->name('colegiado.buscar');
+<<<<<<< HEAD
     //Route::get(Tramite)
     Route::resource('tramites',TramiteController::class);
     Route::resource('tipo-tramite',TipoTramiteController::class);
@@ -60,7 +65,16 @@ Route::group(['middleware'=>['auth']],function (){
     Route::resource('seguimientos',SeguimientoController::class);
 
    
+=======
+>>>>>>> 25a4b92424a1a12dc1040e5b60d8711e3de242b8
 
+    Route::get('/tramites', function () {
+        return view('tramites.index'); //REDERIZA VISTA
+    })->name('tramites.index');
+
+    Route::get('/tramites/prueba', function () {
+        return view('tramites.prueba'); //REDERIZA VISTA
+    })->name('tramites.prueba');
 
 
     //RUTAS PARA CERTIFICADOS
