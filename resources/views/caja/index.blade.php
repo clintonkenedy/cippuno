@@ -139,7 +139,7 @@
                                 <select class="col-9 custom-select mb-2" name="concepto[]">
                                     <option value="-1" selected>Selección concepto de pago</option>
                                     @foreach ($conceptos as $concepto)
-                                    <option value="{{$concepto->id - 1}}">{{$concepto->nombre}}</option>
+                                    <option value="{{$concepto->id}}">{{$concepto->nombre}}</option>
                                     @endforeach
                                 </select>
                                 <input type="text" class="col-2 form-control" readonly>
@@ -179,8 +179,9 @@
             // // console.log(precio.item(0));
             // // const precio = document.getElementById("precioconcepto");
             // console.log(sel.item(0).value);
+            console.log(idconcepto);
             if (idconcepto != -1) {
-                precio.item(0).value = conceptos[idconcepto].precio;
+                precio.item(0).value = conceptos.filter( x => x.id == idconcepto).map( x => x.precio);
             }
             else{
                 precio.item(0).value = '...'
