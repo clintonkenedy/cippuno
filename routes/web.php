@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\ConceptoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,11 @@ Route::group(['middleware'=>['auth']],function (){
     //RUTAS PARA TRAMITES
     Route::resource('colegiado',ColegiadoController::class);
     Route::resource('caja', PagoController::class);
+    Route::get('/concepto', [ConceptoController::class,'index'])->name('conceptos.index');
+    Route::get('/concepto/edit/{id}', [ConceptoController::class,'edit'])->name('conceptos.edit');
+    Route::put('/concepto/update/{id}', [ConceptoController::class,'update'])->name('conceptos.update');
+    Route::post('/nuevoconcepto', [ConceptoController::class,'store'])->name('conceptos.store');
+    Route::delete('/concepto/destroy/{id}', [ConceptoController::class,'destroy'])->name('conceptos.destroy');
     Route::get('/buscar/{dni}', [ColegiadoController::class,'buscardni'])->name('colegiado.buscar');
 
     Route::get('/tramites', function () {

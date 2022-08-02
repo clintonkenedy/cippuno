@@ -258,6 +258,11 @@ return [
             'icon' => 'fas fa-fw fa-book',
         ],
         [
+            'text' => 'Conceptos',
+            'route'  => 'conceptos.index',
+            'icon' => 'fas fa-fw fa-book',
+        ],
+        [
             'text' => 'Caja',
             'route'  => 'caja.index',
             'icon' => 'fas fa-fw fa-book',
