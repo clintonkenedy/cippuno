@@ -15,17 +15,18 @@ class CreateMatriculasTable extends Migration
     {
         Schema::create('matriculas', function (Blueprint $table) {
             $table->id();
-            $table->char('codigo',50);
-            $table->foreignId('colegiado_id')->constrained('colegiados')
+            //$table->char('codigo',50);
+            $table->foreignId('colegiado_id')->nullable()->constrained('colegiados')
                 ->onUpdate('cascade');
             $table->foreignId('curso_id')->constrained('cursos')
                 ->onUpdate('cascade');
             $table->foreignId('pago_id')->constrained('pagos')
                 ->onUpdate('cascade');
-            $table->foreignId('persona_id')->constrained('personas')
+            $table->foreignId('persona_id')->nullable()->constrained('personas')
                 ->onUpdate('cascade');
-            $table->foreignId('rol_matricula_id')->constrained('rol_matriculas')
-                ->onUpdate('cascade');
+            $table->enum('rol',[0,1]);
+            //$table->foreignId('rol_matricula_id')->constrained('rol_matriculas')
+            //    ->onUpdate('cascade');
             $table->timestamps();
         });
     }
