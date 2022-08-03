@@ -24,10 +24,6 @@ class CreateTramitesTable extends Migration
                 ->onUpdate('cascade');
             $table->foreignId('tipo_tramite_id')->constrained('tipo_tramites')
                 ->onUpdate('cascade');
-            $table->binary('archivo_1')->nullable(); 
-            $table->binary('archivo_2')->nullable();
-            $table->binary('archivo_3')->nullable(); 
-            $table->binary('archivo_4')->nullable();  
             $table->timestamps();
         });
     }
