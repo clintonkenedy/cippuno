@@ -3,8 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\TramiteController; 
+use App\Http\Controllers\TipoTramiteController; 
+use App\Http\Controllers\OficinaController; 
+use App\Http\Controllers\SeguimientoController; 
 use App\Http\Controllers\ConceptoController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +36,37 @@ Route::group(['middleware'=>['auth']],function (){
     Route::post('/nuevoconcepto', [ConceptoController::class,'store'])->name('conceptos.store');
     Route::delete('/concepto/destroy/{id}', [ConceptoController::class,'destroy'])->name('conceptos.destroy');
     Route::get('/buscar/{dni}', [ColegiadoController::class,'buscardni'])->name('colegiado.buscar');
+
+    //Route::get(Tramite)
+    Route::resource('tramites',TramiteController::class);
+    Route::resource('tipo-tramite',TipoTramiteController::class);
+    Route::get('/tramites.crear', function () {
+        return view('tramites.creartrami'); //REDERIZA VISTA
+    })->name('tramites.creartrami');
+    //
+    Route::get('/tramites.mostrar', [TramiteController::class,'show'])->name('tramites.mostrar');
+    Route::get('/tramites.requisitos', function () {
+        return view('tramites.requisitos'); //REQUISITOS DE TRAMITES.
+    })->name('tramites.requisitos');
+    Route::get('/tramites.oficinas', function () {
+        return view('tramites.oficinas'); //REQUISITOS DE TRAMITES.
+    })->name('tramites.oficinas');
+    Route::get('/tramites.oficinas', [TramiteController::class,'ofic'])->name('tramites.oficinas');
+    
+    Route::post('/tramites.crearcole', [TramiteController::class,'crecole'])->name('tramites.crearcole');
+    Route::post('/tramites.crearperso', [TramiteController::class,'creperso'])->name('tramites.crearperso');
+    Route::get('/tramites.crearperso', function () {
+        return view('tramites.crearperso'); //REDERIZA VISTA
+    })->name('tramites.crearperso');
+    Route::get('/tramites.crearcole', function () {
+        return view('tramites.crearcole'); //REDERIZA VISTA
+    })->name('tramites.crearcole');
+    //RUTA DE OFICINA
+    Route::resource('oficinas',OficinaController::class);
+    //RUTA DE SEGUIMIENTO
+    Route::resource('seguimientos',SeguimientoController::class);
+
+   
 
     Route::get('/tramites', function () {
         return view('tramites.index'); //REDERIZA VISTA
