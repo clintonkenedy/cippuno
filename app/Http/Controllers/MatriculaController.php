@@ -38,13 +38,13 @@ class MatriculaController extends Controller
         $colegiado = Colegiado::where('dni', $request->dni)->get();
         if (count($colegiado) == 0) {
             $colegiado = Persona::where('dni', $request->dni)->get();
-            $cursosmatriculados = Matricula::where('persona_id', $colegiado[0]->id)->get();
+            $matricula = Matricula::where('persona_id', $colegiado[0]->id)->get();
         } else {
-            $cursosmatriculados = Matricula::where('colegiado_id', $colegiado[0]->id)->get();
+            $matricula = Matricula::where('colegiado_id', $colegiado[0]->id)->get();
         }
         $cursos = null;
-        if(count($cursosmatriculados)>0){
-            $cursos = Curso::where('id', $cursosmatriculados[0]->curso_id)->get();
+        if(count($matricula)>0){
+            $cursos = Curso::where('id', $matricula[0]->curso_id)->get();
         }
         return view('certificados.usuarios.miscertificados', compact('colegiado', 'cursos'));
         //--------------------------------------
@@ -56,10 +56,14 @@ class MatriculaController extends Controller
         $colegiado = Colegiado::find($idcolegiado);
         if (empty($colegiado)) {
             $colegiado = Persona::find($idcolegiado);
+            $matricula = Matricula::where('persona_id', $colegiado->id)->first();
+        }
+        else{
+            $matricula = Matricula::where('colegiado_id', $colegiado->id)->first();
         }
         $curso = Curso::find($idcurso);
         //--------------
-        $pdf = PDF::loadView('certificados.usuarios.certificadopdf', compact('colegiado', 'curso'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('certificados.usuarios.certificadopdf', compact('colegiado', 'curso', 'matricula'))->setPaper('a4', 'landscape');
         return $pdf->download($curso->nombre . '-' . $colegiado->nombres . '.pdf');
     }
 

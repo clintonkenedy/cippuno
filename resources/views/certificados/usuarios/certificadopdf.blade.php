@@ -24,26 +24,26 @@
 
 </style>
 <body>
-    <div class="container mt-4">
+    <div class="container mt-5 text-center">
         <div class="row">
-            <div class="col text-center">
+            <div class="col">
+                <h2>COLEGIO DE INGENIEROS PUNO</h2>
+                <br>
                 <h1>CERTIFICADO</h1>
                 <br>
             </div>
-            <div class="col display-5">
-                <h3 class="text-center mb-1">
-                    {{$colegiado->nombres}}
-                </h3>
-                <p>
-                    ............................................................................................................................................
-                </p>
+            <div class="col display-5 mt-5">
+                <h4 class="mb-1">
+                    Otorgado a: {{$colegiado->nombres}} {{$colegiado->a_paterno}} {{$colegiado->a_materno}}
+                </h4>
                 <br>
-                <p>
-                    Por haber participado con éxito en el curso <span class="font-weight-bold text-uppercas">{{$curso->nombre}}</span>,
-                    con una duración de {{$curso->duracion}} días.
-                </p>
-                <p>
-                    El curso fue impartido el CIP.
+                <h4>
+                    Por haber participado en calidad de @if($matricula->rol==0) Participante @else ponente @endif
+                </h4>
+                <br>
+                <p class="text-left mt-5">
+                    En el curso <span class="font-weight-bold text-uppercas">{{$curso->nombre}}</span>,
+                    organizado por el Colegio de Ingenieros, llevado a cabo desde {{$curso->fecha_inicio}} hasta {{$curso->fecha_fin}}, con una duración de {{$curso->duracion}} días.
                 </p>
             </div>
         </div>
