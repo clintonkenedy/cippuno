@@ -31,8 +31,9 @@ class CursoController extends Controller
         $curso->temario = $request->temario;
         $curso->ponentes = "";
         $curso->modelo_certificado = "";
-        $curso->estado = 0;
+        $curso->estado = '0';
 
+        $curso->save();
         return redirect('/certificados')->with('mensaje', 'Nuevo curso creado exitosamente');
     }
 
