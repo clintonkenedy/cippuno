@@ -26,7 +26,7 @@
                     <th>Sede</th>
                     <th>Forma de Pago</th>
                     <th>Tipo de Persona</th>
-                    <th>Nombres</th>
+                    <th>Apellidos</th>
                 </thead>
                 <tbody>
                     @foreach ($pagos as $pago)
@@ -40,7 +40,7 @@
                         @else
                         <td> <span class="badge bg-danger">Colegiado</span></td>
                         @endif
-                        <td>{{ $pago->persona->nombres ?? $pago->colegiado->nombres ?? 'No Existe registro'}}</td>
+                        <td>{{ $pago->persona->a_paterno ?? ($pago->colegiado->a_paterno." ".$pago->colegiado->a_materno) ?? 'No Existe registro'}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -134,7 +134,7 @@
                             Concepto de Pago:
                             <span style="color: red;">*</span>
                         </label>
-                        <div class="row" id="divpagos">
+                        <div class="row" id="divpagos" onchange="sumatotal()">
                             <div class="col-9 input-group" id="divconceptos1" onchange="cambioPago(this)">
                                 <select class="col-9 custom-select mb-2" name="concepto[]">
                                     <option value="-1" selected>Selección concepto de pago</option>
@@ -142,7 +142,7 @@
                                     <option value="{{$concepto->id}}">{{$concepto->nombre}}</option>
                                     @endforeach
                                 </select>
-                                <input type="text" class="col-2 form-control" readonly>
+                                <input type="text" class="col-2 form-control" name="stotal" readonly>
                                 <button type="button" class="col-1 close form-control" aria-label="Close" onclick="prueba(this)">
                                     <span aria-hidden="true" class="text-danger">&times;</span>
                                 </button>
@@ -151,7 +151,17 @@
                                 <button class="btn btn-warning float-right" type="button" onclick="addConcepto()">Agregar</button>
                             </div>
                         </div>
-
+                        <div class="row mt-2">
+                            <div class="col-md">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text text-success"><b>TOTAL: </b></span>
+                                      <span class="input-group-text text-success">S/.</span>
+                                    </div>
+                                    <input type="text" class="form-control text-success text-center" id="total" readonly>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -187,7 +197,19 @@
                 precio.item(0).value = '...'
             }
 
+
         }
+
+        const sumatotal = () => {
+            var arr = document.getElementsByName('stotal');
+            var tot=0;
+            for(var i=0;i<arr.length;i++){
+                if(parseInt(arr[i].value))
+                    tot += parseInt(arr[i].value);
+            }
+            document.getElementById('total').value = tot;
+        }
+
         const buscar = async ( dni ) => {
             event.preventDefault();
             const apaterno = document.getElementById('apaterno');

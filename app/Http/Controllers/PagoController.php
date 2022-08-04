@@ -69,13 +69,15 @@ class PagoController extends Controller
         $pago->save();
 
 
+
         if (sizeof($request->concepto)>1) {
             for ($i=0; $i < sizeof($request->concepto); $i++) {
                 $conceptopago = new ConceptoPago;
-                $conceptopago->cantidad='1';
-                $conceptopago->precio='100';
-                $conceptopago->pago_id=$pago->id;
-                $conceptopago->concepto_id=$request->concepto[$i]+1;
+                $conceptopago->cantidad = '1';
+                $conceptopago->precio = Concepto::where('id',$request->concepto[$i])->get()[0]->precio;
+                $conceptopago->pago_id = $pago->id;
+                $conceptopago->concepto_id = $request->concepto[$i];
+                $conceptopago->save();
             }
         }
         else {
@@ -83,9 +85,10 @@ class PagoController extends Controller
             $conceptopago->cantidad='1';
             $conceptopago->precio='100';
             $conceptopago->pago_id=$pago->id;
-            $conceptopago->concepto_id=$request->concepto[0]+1;
+            $conceptopago->concepto_id=$request->concepto[0];
+            $conceptopago->save();
         }
-        $conceptopago->save();
+
 
         return redirect()->route('caja.index');
     }

@@ -25,6 +25,7 @@ class CreateMatriculasTable extends Migration
             $table->foreignId('persona_id')->nullable()->constrained('personas')
                 ->onUpdate('cascade');
             $table->enum('rol',[0,1]);
+            $table->bigInteger('asistencia');
             //$table->foreignId('rol_matricula_id')->constrained('rol_matriculas')
             //    ->onUpdate('cascade');
             $table->timestamps();
