@@ -69,7 +69,9 @@
                             @endif
                         </div>
                         <div class="col-3 align-self-center">
+                            @if($curso->estado!=2)
                             <a href="{{ route('vistamatricular', $curso->id) }}" class="w-100 card-link btn btn-light border-dark">Ingresar</a>
+                            @endif
                         </div>
                     </div>
                 </div>

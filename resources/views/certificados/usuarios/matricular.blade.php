@@ -50,11 +50,11 @@
                         Inscripción al curso: {{ $curso->nombre }}
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('matricularparticipante',$curso->id) }}" method="POST">
+                        <form action="{{ route('matricularparticipante', $curso->id) }}" method="POST">
                             @csrf
                             <div class="form-group mb-2">
-                                <label for="dni">Número de DNI:</label>
-                                <input type="text" required name="dni" id="dni" placeholder="INGRESE DNI (8 DIGITOS)" class="form-control" maxlength="8">
+                                <label for="dni" class="mb-3">Número de DNI:</label>
+                                <input type="text" required name="dni" id="dni" placeholder="INGRESE DNI (8 DIGITOS)" class="form-control mb-3" maxlength="8">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-light border-dark">Ingresar</button>

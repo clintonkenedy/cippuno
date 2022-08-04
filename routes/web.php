@@ -4,12 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ConceptoController;
-<<<<<<< HEAD
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\MatriculaController;
-=======
 
->>>>>>> 674808c8fd96dc202d8c071adbbec31ec224c006
 /*
 |--------------------------------------------------------------------------
 | Web Routes

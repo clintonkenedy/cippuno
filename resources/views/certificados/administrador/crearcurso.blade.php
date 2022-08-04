@@ -63,25 +63,6 @@
                                 <label for="temario">Temario:</label>
                                 <input type="text" name="temario" id="temario" placeholder="temario" class="form-control">
                             </div>
-                            <div class="form-group col-6">
-                                <label for="ponentes">Ponentes:</label>
-                                <input type="text" name="ponentes" id="ponentes" placeholder="ponentes" class="form-control">
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="form-group mb-2 col-6">
-                                <label for="modelo_certificado">Modelo del Certificado:</label>
-                                <input type="text" name="modelo_certificado" id="modelo_certificado" placeholder="modelo certificado" class="form-control">
-                            </div>
-                            <div class="form-group mb-2 col-6">
-                                <label for="estado">Estado:</label>
-                                <select class="custom-select" name="estado" id="estado">
-                                    <option selected value="0">En espera</option>
-                                    <option value="1">En proceso</option>
-                                    <option value="2">Finalizado</option>
-                                    <option value="3">Cancelado</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="form-group mb-2">
                             <button class="btn btn-light border-dark" type="submit">Crear curso</button>

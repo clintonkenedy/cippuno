@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Matricula;
 use App\Models\Curso;
 use App\Models\Colegiado;
+use App\Models\ConceptoPago;
 use App\Models\Persona;
+use App\Models\Pago;
 use Illuminate\Http\Request;
 use PDF;
+
 class MatriculaController extends Controller
 {
 
@@ -32,27 +35,32 @@ class MatriculaController extends Controller
     public function miscertificados(Request $request)
     {
         // Solo esta para colegiado
-        $colegiado = Colegiado::where('dni',$request->dni)->get();
-        if(empty($colegiado)){
-            $colegiado = Persona::where('dni',$request->dni)->get();
+        $colegiado = Colegiado::where('dni', $request->dni)->get();
+        if (count($colegiado) == 0) {
+            $colegiado = Persona::where('dni', $request->dni)->get();
+            $cursosmatriculados = Matricula::where('persona_id', $colegiado[0]->id)->get();
+        } else {
+            $cursosmatriculados = Matricula::where('colegiado_id', $colegiado[0]->id)->get();
         }
-        $cursosmatriculados = Matricula::where('colegiado_id', $colegiado[0]->id)->get();
-        $cursos = Curso::where('id', $cursosmatriculados[0]->curso_id)->get();
-        //--------------------------------------
-        //$cursosmatriculados = Matricula::all();
+        $cursos = null;
+        if(count($cursosmatriculados)>0){
+            $cursos = Curso::where('id', $cursosmatriculados[0]->curso_id)->get();
+        }
         return view('certificados.usuarios.miscertificados', compact('colegiado', 'cursos'));
+        //--------------------------------------
     }
 
-    public function certificadoPDF($idcurso, $idcolegiado){
+    public function certificadoPDF($idcurso, $idcolegiado)
+    {
         //Recuperar todos los productos de la db
         $colegiado = Colegiado::find($idcolegiado);
-        if(empty($colegiado)){
+        if (empty($colegiado)) {
             $colegiado = Persona::find($idcolegiado);
         }
         $curso = Curso::find($idcurso);
         //--------------
         $pdf = PDF::loadView('certificados.usuarios.certificadopdf', compact('colegiado', 'curso'))->setPaper('a4', 'landscape');
-        return $pdf->download($curso->nombre.'-'.$colegiado->nombres.'.pdf');
+        return $pdf->download($curso->nombre . '-' . $colegiado->nombres . '.pdf');
     }
 
     public function create($id, Request $request)
@@ -69,16 +77,38 @@ class MatriculaController extends Controller
                 if (empty($matriculadoc)) {
 
                     $participante = "1";
+                    $pago = new Pago;
+                    $pago->numero = "1234567";
+                    $pago->observaciones = "sin";
+                    $pago->colegiado_id = $colegiado->id;
+                    $pago->sede_id = 1;
+                    $pago->forma_pago_id = 2;
+                    $pago->save();
+
+                    $cpago = new ConceptoPago;
+                    $cpago->cantidad = '1';
+                    $cpago->precio = $curso->precio;
+                    $cpago->pago_id = $pago->id;
+                    $cpago->concepto_id = 2;
+                    $cpago->save();
+
                     $matricula = new Matricula;
                     $matricula->colegiado_id = $colegiado->id;
                     $matricula->curso_id = $curso->id;
                     $matricula->pago_id = 1;
-                    $matricula->rol = "0";
+                    $matricula->rol = '0';
+                    $matricula->asistencia = $curso->duracion;
 
                     $matricula->save();
                     return redirect('/cursosycertificados')->with('mensaje', 'Inscripción exitosa, colegiado registrado intente ingresar de nuevo al curso.');
                 } else {
-                    return redirect($curso->enlace);
+                    if ($curso->estado == "1") {
+                        $matriculadoc->asistencia = $matriculadoc->asistencia - 1;
+                        $matriculadoc->save();
+                        return redirect($curso->enlace);
+                    } else {
+                        return redirect('/cursosycertificados')->with('mensaje', 'El curso no esta en proceso');
+                    }
                 }
             }
         }
@@ -92,16 +122,38 @@ class MatriculaController extends Controller
                 if (empty($matriculadop)) {
 
                     $participante = "1";
+                    $pago = new Pago;
+                    $pago->numero = "1234567";
+                    $pago->observaciones = "sin";
+                    $pago->persona_id = $persona->id;
+                    $pago->sede_id = 1;
+                    $pago->forma_pago_id = 2;
+                    $pago->save();
+
+                    $cpago = new ConceptoPago;
+                    $cpago->cantidad = "1";
+                    $cpago->precio = $curso->precio;
+                    $cpago->pago_id = $pago->id;
+                    $cpago->concepto_id = 2;
+                    $cpago->save();
+
                     $matricula = new Matricula;
                     $matricula->curso_id = $curso->id;
                     $matricula->pago_id = 1;
                     $matricula->persona_id = $persona->id;
-                    $matricula->rol = "0";
+                    $matricula->rol = '0';
+                    $matricula->asistencia = $curso->duracion;
 
                     $matricula->save();
                     return redirect('/cursosycertificados')->with('mensaje', 'Inscripción exitosa, persona registrada intente ingresar de nuevo al curso.');
                 } else {
-                    return redirect($curso->enlace);
+                    if ($curso->estado == "1") {
+                        $matriculadoc->asistencia = $matriculadoc->asistencia - 1;
+                        $matriculadoc->save();
+                        return redirect($curso->enlace);
+                    } else {
+                        return redirect('/cursosycertificados')->with('mensaje', 'El curso no esta en proceso');
+                    }
                 }
             }
         }
@@ -125,18 +177,33 @@ class MatriculaController extends Controller
 
         $persona->save();
 
-        $personab = Persona::where('dni', $request->dni)->first();
+        #$personab = Persona::where('dni', $request->dni)->first();
 
-        if (!empty($personab)) {
-            $matricula = new Matricula;
-            $matricula->curso_id = $curso->id;
-            $matricula->pago_id = 1;
-            $matricula->persona_id = $personab->id;
-            $matricula->rol = "0";
 
-            $matricula->save();
-            return redirect('/cursosycertificados')->with('mensaje', 'Inscripción exitosa, persona registrada intente ingresar de nuevo al curso.');
-        }
+        $pago = new Pago;
+        $pago->numero = "1234566";
+        $pago->observaciones = "sin";
+        $pago->persona_id = $persona->id;
+        $pago->sede_id = 1;
+        $pago->forma_pago_id = 2;
+        $pago->save();
+
+        $cpago = new ConceptoPago;
+        $cpago->cantidad = '1';
+        $cpago->precio = $curso->precio;
+        $cpago->pago_id = $pago->id;
+        $cpago->concepto_id = 2;
+        $cpago->save();
+
+        $matricula = new Matricula;
+        $matricula->curso_id = $curso->id;
+        $matricula->pago_id = 1;
+        $matricula->persona_id = $persona->id;
+        $matricula->rol = "0";
+        $matricula->asistencia = $curso->duracion;
+
+        $matricula->save();
+        return redirect('/cursosycertificados')->with('mensaje', 'Inscripción exitosa, persona registrada intente ingresar de nuevo al curso.');
     }
 
 
@@ -192,11 +259,6 @@ class MatriculaController extends Controller
     {
         $curso = Curso::find($id);
         $matricula = Matricula::find($request->id_matricula);
-
-        $matricula->curso_id = $matricula->curso_id;
-        $matricula->colegiado_id = $matricula->colegiado_id;
-        $matricula->pago_id = $matricula->pago_id;
-        $matricula->persona_id = $matricula->persona_id;
 
         if ($request->condicion == "0") {
             $matricula->rol = "1";

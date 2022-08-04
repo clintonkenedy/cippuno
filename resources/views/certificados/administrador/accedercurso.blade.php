@@ -73,19 +73,9 @@
                                 <label for="temario">Temario:</label>
                                 <input type="text" value="{{$curso->temario}}" name="temario" id="temario" placeholder="temario" class="form-control">
                             </div>
-                            <div class="form-group col-6">
-                                <label for="ponentes">Ponentes:</label>
-                                <input type="text" value="{{$curso->ponentes}}" name="ponentes" id="ponentes" placeholder="ponentes" class="form-control">
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="form-group mb-2 col-6">
-                                <label for="modelo_certificado">Modelo del Certificado:</label>
-                                <input type="text" value="{{$curso->modelo_certificado}}" name="modelo_certificado" id="modelo_certificado" placeholder="modelo certificado" class="form-control">
-                            </div>
                             <div class="form-group mb-2 col-6">
                                 <label for="estado">Estado:</label>
-                                <select class="custom-select" name="estado" id="estado">
+                                <select class="custom-select" name="estado" id="estado" value="{{$curso->estado}}">
                                     @if($curso->estado == 0)
                                     <option selected value="0">En espera</option>
                                     @else
@@ -100,11 +90,6 @@
                                     <option selected value="2">Finalizado</option>
                                     @else
                                     <option value="2">Finalizado</option>
-                                    @endif
-                                    @if($curso->estado == 3)
-                                    <option selected value="3">Cancelado</option>
-                                    @else
-                                    <option value="3">Cancelado</option>
                                     @endif
                                 </select>
                             </div>

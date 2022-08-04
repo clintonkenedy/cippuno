@@ -42,12 +42,12 @@
                 <table class="table table-striped table-bordered text-start w-100">
                     <thead>
                         <tr class="bg-secondary">
-                            <th scope="col" class="text-center">ID</th>
-                            <th scope="col" class="text-center">Nombre</th>
-                            <th scope="col" class="text-center">Precio (S/.)</th>
-                            <th scope="col" class="text-center">Duración</th>
-                            <th scope="col" class="text-center">Estado Actual</th>
-                            <th scope="col" class="text-center">Acciones</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Precio (S/.)</th>
+                            <th class="text-center">Duración</th>
+                            <th class="text-center">Estado Actual</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,16 +68,17 @@
                             @endif
 
                             <td>
-                                <div class="col d-flex justify-content-center">
-                                    <a class="btn bg-transparent border border-success" href="{{ route('accedercurso',$curso->id) }}">Editar</a>
-                                </div>
-
-                                <div class="col d-flex justify-content-center">
-                                    <form action="{{ route('eliminarcurso', $curso->id)}}" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn bg-transparent border border-danger">Eliminar</button>
-                                    </form>
+                                <div class="d-flex justify-content-center">
+                                    <div class="me-1">
+                                        <a class="btn btn-success border border-success" href="{{ route('accedercurso',$curso->id) }}">Editar</a>
+                                    </div>
+                                    <div class="">
+                                        <form action="{{ route('eliminarcurso', $curso->id)}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-danger border border-danger">Eliminar</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -85,17 +86,6 @@
                     </tbody>
                 </table>
             </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row mt-2">
-        <div class="col text-start">
-
-            <h4>Matrículas</h4>
-            <hr>
 
         </div>
     </div>

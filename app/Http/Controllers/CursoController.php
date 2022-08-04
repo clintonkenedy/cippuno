@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use App\Models\Matricula;
+use App\Models\ConceptoPago;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,9 @@ class CursoController extends Controller
         $curso->fecha_inicio = $request->fecha_inicio;
         $curso->fecha_fin = $request->fecha_fin;
         $curso->temario = $request->temario;
-        $curso->ponentes = $request->ponentes;
-        $curso->modelo_certificado = $request->modelo_certificado;
-        $curso->estado = $request->estado;
-
-        $curso->save();
+        $curso->ponentes = "";
+        $curso->modelo_certificado = "";
+        $curso->estado = 0;
 
         return redirect('/certificados')->with('mensaje', 'Nuevo curso creado exitosamente');
     }
@@ -66,8 +65,8 @@ class CursoController extends Controller
         $curso->fecha_inicio = $request->fecha_inicio;
         $curso->fecha_fin = $request->fecha_fin;
         $curso->temario = $request->temario;
-        $curso->ponentes = $request->ponentes;
-        $curso->modelo_certificado = $request->modelo_certificado;
+        $curso->ponentes = "";
+        $curso->modelo_certificado = "";
         $curso->estado = $request->estado;
         $curso->save();
 
