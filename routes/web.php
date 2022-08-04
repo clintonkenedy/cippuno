@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ConceptoController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\RolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware'=>['auth']],function (){
+    //RUTAS PARA USUARIOS
+    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('roles', RolController::class);
+
     //RUTAS PARA TRAMITES
     Route::resource('colegiado',ColegiadoController::class);
     Route::resource('caja', PagoController::class);
