@@ -3,83 +3,79 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curso;
+use App\Models\Matricula;
+use App\Models\ConceptoPago;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CursoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $cursos = Curso::all();
+        return view('certificados.administrador.index', compact('cursos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $fecha_f = Carbon::parse($request->fecha_fin);
+        $fecha_i = Carbon::parse($request->fecha_inicio);
+
+        $curso = new Curso;
+        $curso->nombre = $request->nombre;
+        $curso->precio = $request->precio;
+        $curso->enlace = $request->enlace;
+        $curso->duracion = strval($fecha_f->diffInDays($fecha_i));
+        $curso->fecha_inicio = $request->fecha_inicio;
+        $curso->fecha_fin = $request->fecha_fin;
+        $curso->temario = $request->temario;
+        $curso->ponentes = "";
+        $curso->modelo_certificado = "";
+        $curso->estado = 0;
+
+        return redirect('/certificados')->with('mensaje', 'Nuevo curso creado exitosamente');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Curso $curso)
+    public function show()
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Curso $curso)
+    public function edit($id)
     {
-        //
+        $curso = Curso::find($id);
+        return view('certificados.administrador.editarcurso', compact('curso'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Curso $curso)
+    public function update($id, Request $request)
     {
-        //
+        $fecha_f = Carbon::parse($request->fecha_fin);
+        $fecha_i = Carbon::parse($request->fecha_inicio);
+
+        $curso = Curso::find($id);
+        $curso->nombre = $request->nombre;
+        $curso->precio = $request->precio;
+        $curso->enlace = $request->enlace;
+        $curso->duracion = strval($fecha_f->diffInDays($fecha_i));
+        $curso->fecha_inicio = $request->fecha_inicio;
+        $curso->fecha_fin = $request->fecha_fin;
+        $curso->temario = $request->temario;
+        $curso->ponentes = "";
+        $curso->modelo_certificado = "";
+        $curso->estado = $request->estado;
+        $curso->save();
+
+        return redirect('/certificados')->with('mensaje2', 'Actualización exitosa, curso actualizado.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Curso $curso)
+    public function destroy($id)
     {
-        //
+        Curso::destroy($id);
+        return redirect('/certificados')->with('mensaje3', 'Eliminación exitosa, curso eliminado.');
     }
 }
