@@ -1,9 +1,3 @@
-<?php
-   $DateAndTime = date('d-m-Y ');
-   echo  $DateAndTime;
-
-            ?>
-
 {{ date('Y-m-d',time()) }}
 @extends('adminlte::page')
 
