@@ -14,6 +14,7 @@
     padding: 0px;
 }
     body{
+        background-image:url('https://i.postimg.cc/YqrC7kt7/certificadocip.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;

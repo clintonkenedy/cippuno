@@ -9,6 +9,7 @@ use App\Models\ConceptoPago;
 use App\Models\Persona;
 use App\Models\Pago;
 use Illuminate\Http\Request;
+use Mockery\Undefined;
 use PDF;
 
 class MatriculaController extends Controller
@@ -35,16 +36,18 @@ class MatriculaController extends Controller
     public function miscertificados(Request $request)
     {
         // Solo esta para colegiado
-        $colegiado = Colegiado::where('dni', $request->dni)->get();
-        if (count($colegiado) == 0) {
-            $colegiado = Persona::where('dni', $request->dni)->get();
-            $matricula = Matricula::where('persona_id', $colegiado[0]->id)->get();
+        $colegiado = Colegiado::where('dni', $request->dni)->first();
+        $matricula = null;
+        if (empty($colegiado)) {
+            $colegiado = Persona::where('dni', $request->dni)->first();
+            if (!empty($colegiado))
+                $matricula = Matricula::where('persona_id', $colegiado[0]->id)->get();
         } else {
             $matricula = Matricula::where('colegiado_id', $colegiado[0]->id)->get();
         }
         $cursos = null;
-        if(count($matricula)>0){
-            $cursos = Curso::where('id', $matricula[0]->curso_id)->get();
+        if (!empty($cursos)) {
+            $cursos = Curso::where('id', $matricula[0]->curso_id)->first();
         }
         return view('certificados.usuarios.miscertificados', compact('colegiado', 'cursos'));
         //--------------------------------------
@@ -57,8 +60,7 @@ class MatriculaController extends Controller
         if (empty($colegiado)) {
             $colegiado = Persona::find($idcolegiado);
             $matricula = Matricula::where('persona_id', $colegiado->id)->first();
-        }
-        else{
+        } else {
             $matricula = Matricula::where('colegiado_id', $colegiado->id)->first();
         }
         $curso = Curso::find($idcurso);
