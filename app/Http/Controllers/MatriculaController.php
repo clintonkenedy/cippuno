@@ -37,18 +37,28 @@ class MatriculaController extends Controller
     {
         // Solo esta para colegiado
         $colegiado = Colegiado::where('dni', $request->dni)->first();
-        $matricula = null;
+        //$matriculas = null;
+        $cursos = null;
         if (empty($colegiado)) {
             $colegiado = Persona::where('dni', $request->dni)->first();
-            if (!empty($colegiado))
-                $matricula = Matricula::where('persona_id', $colegiado[0]->id)->get();
+            if (!empty($colegiado)) {
+                // $matriculas = Matricula::where('persona_id', $colegiado->id)->get();
+                $cursos = Colegiado::join('matriculas', 'matriculas.colegiado_id', '=', 'colegiados.id')
+                    ->join('cursos', 'cursos.id', '=', 'matriculas.curso_id')
+                    ->select('cursos.id', 'cursos.nombre')
+                    ->where('matriculas.colegiado_id', '=', $colegiado->id)
+                    ->get();
+            }
         } else {
-            $matricula = Matricula::where('colegiado_id', $colegiado[0]->id)->get();
+            // $matriculas = Matricula::where('colegiado_id', $colegiado->id)->get();
+            $cursos = Colegiado::join('matriculas', 'matriculas.colegiado_id', '=', 'colegiados.id')
+                ->join('cursos', 'cursos.id', '=', 'matriculas.curso_id')
+                ->select('cursos.id', 'cursos.nombre')
+                ->where('matriculas.colegiado_id', '=', $colegiado->id)
+                ->get();
         }
-        $cursos = null;
-        if (!empty($cursos)) {
-            $cursos = Curso::where('id', $matricula[0]->curso_id)->first();
-        }
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln($cursos[0]->id);
         return view('certificados.usuarios.miscertificados', compact('colegiado', 'cursos'));
         //--------------------------------------
     }
@@ -76,11 +86,14 @@ class MatriculaController extends Controller
 
         if ($participante == "0") {
             $colegiado = Colegiado::where('dni', $request->dni)->first();
-
+            //!empty($colegiado)
             if (!empty($colegiado)) {
+                //$matriculadoc = Matricula::where('colegiado_id', $colegiado->id)->first();
                 $matriculadoc = Matricula::where('colegiado_id', $colegiado->id)->first();
+                $matriculadoc2 = Matricula::where('colegiado_id', $matriculadoc->colegiado_id)->get();
+                $matriculadoc3 = Matricula::where('curso_id', $matriculadoc2->curso_id)->get();
 
-                if (empty($matriculadoc)) {
+                if (count($matriculadoc3) > 1) {
 
                     $participante = "1";
                     $pago = new Pago;
@@ -124,8 +137,8 @@ class MatriculaController extends Controller
 
             if (!empty($persona)) {
                 $matriculadop = Matricula::where('persona_id', $persona->id)->first();
-
-                if (empty($matriculadop)) {
+                $mcurso = Curso::where('id', $matriculadoc->curso_id)->first();
+                if (empty($mcurso)) {
 
                     $participante = "1";
                     $pago = new Pago;

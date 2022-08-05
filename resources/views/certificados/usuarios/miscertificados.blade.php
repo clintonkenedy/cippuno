@@ -55,7 +55,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-center">
                                 <div class="list-group list-group-flush">{{$curso->nombre}}</div>
-                                <div class="ms-5"><a href="{{route('certificadopdf', [$curso->id, $colegiado[0]->id])}}">Descargar certificado</a></div>
+                                <div class="ms-5"><a href="{{route('certificadopdf', [$curso->id, $colegiado->id])}}">Descargar certificado</a></div>
                             </li>
                         </ul>
                         @endforeach
