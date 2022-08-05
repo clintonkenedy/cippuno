@@ -15,14 +15,25 @@ class CreateColegiadosTable extends Migration
     {
         Schema::create('colegiados', function (Blueprint $table) {
             $table->id();
-            $table->string('nombres',80);
-            $table->char('codigo_colegiado',6);
-            $table->char('dni',8);
-            $table->string('a_paterno',50);
-            $table->string('a_materno',50);
-            $table->string('direccion',80);
-            $table->date('ultimo_pago');
-            $table->foreignId('capitulo_id')->constrained('capitulos')->onUpdate('cascade');
+
+            // add nullable attributes for testing table
+            $table->string('nombres',80)->nullable();
+            $table->char('codigo_colegiado',6)->nullable();
+            $table->char('dni',8)->nullable();
+            $table->string('a_paterno',50)->nullable();
+            $table->string('a_materno',50)->nullable();
+            $table->string('direccion',80)->nullable();
+            $table->date('ultimo_pago')->nullable();
+            $table->foreignId('capitulo_id')->nullable()->constrained('capitulos')->onUpdate('cascade');
+
+            // add columns for login
+            $table->string('email')->unique();
+            $table->string('password');
+
+            // add columns for profile
+            $table->string('description')->nullable(); // carrera(s)
+            $table->string('photo')->nullable();
+
             $table->timestamps();
         });
     }
