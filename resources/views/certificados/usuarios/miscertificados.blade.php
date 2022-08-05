@@ -48,7 +48,7 @@
                 <div class="card" style="width: 100%;">
                     @if(!empty($cursos))
                     <div class="card-header">
-                        Lista de cetificados de {{$colegiado[0]->nombres}}
+                        Lista de cetificados de {{$colegiado->nombres}}
                     </div>
                     <div class="card-body">
                         @foreach($cursos as $curso)

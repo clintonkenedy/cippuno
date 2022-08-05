@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\V2\ConceptoController;
 use App\Http\Controllers\Api\V2\FormaPagoController;
 use App\Http\Controllers\Api\V2\ConceptoPagoController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\V3\UsersController;
+use App\Http\Controllers\Api\v4\ColegiadoController as V4ColegiadoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,3 +45,11 @@ Route::apiResource('v2/pagos',PagoV2::class)
 
 Route::post('login',[LoginController::class,'login']);
 
+
+Route::post('/v3/login', [UsersController::class, 'login']);
+Route::post('/v3/register', [UsersController::class, 'register']);
+
+
+// add routes for api - app mobile
+Route::post('v4/login', [V4ColegiadoController::class, 'login']);
+Route::post('v4/register', [V4ColegiadoController::class, 'register']);
