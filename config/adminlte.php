@@ -248,6 +248,16 @@ return [
         ],
         ['header' => 'MODULOS'],
         [
+            'text' => 'Usuarios',
+            'route'  => 'usuarios.index',
+            'icon' => 'fas fa-fw fa-book',
+        ],
+        [
+            'text' => 'Roles',
+            'route'  => 'roles.index',
+            'icon' => 'fas fa-fw fa-book',
+        ],
+        [
             'text' => 'Certificados',
             'route'  => 'certificados.index',
             'icon' => 'fas fa-fw fa-book',

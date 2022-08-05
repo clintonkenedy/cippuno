@@ -1,5 +1,7 @@
 <?php
 
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ColegiadoController;
 use App\Http\Controllers\PagoController;
@@ -7,6 +9,8 @@ use App\Http\Controllers\ConceptoController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\MatriculaController;
 
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\RolController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +39,10 @@ Route::get('/certificado/pdf/{idcurso}/{idcolegiado}', [MatriculaController::cla
 Auth::routes();
 
 Route::group(['middleware'=>['auth']],function (){
+    //RUTAS PARA USUARIOS
+    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('roles', RolController::class);
+
     //RUTAS PARA TRAMITES
     Route::resource('colegiado',ColegiadoController::class);
     Route::resource('caja', PagoController::class);

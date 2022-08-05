@@ -70,7 +70,7 @@ class PagoController extends Controller
 
 
 
-        if (sizeof($request->concepto)>1) {
+        if (sizeof($request->concepto)>=0) {
             for ($i=0; $i < sizeof($request->concepto); $i++) {
                 $conceptopago = new ConceptoPago;
                 $conceptopago->cantidad = '1';
@@ -80,15 +80,6 @@ class PagoController extends Controller
                 $conceptopago->save();
             }
         }
-        else {
-            $conceptopago = new ConceptoPago;
-            $conceptopago->cantidad='1';
-            $conceptopago->precio='100';
-            $conceptopago->pago_id=$pago->id;
-            $conceptopago->concepto_id=$request->concepto[0];
-            $conceptopago->save();
-        }
-
 
         return redirect()->route('caja.index');
     }

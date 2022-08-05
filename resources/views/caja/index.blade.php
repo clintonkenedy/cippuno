@@ -26,6 +26,8 @@
                     <th>Sede</th>
                     <th>Forma de Pago</th>
                     <th>Tipo de Persona</th>
+                    <th>DNI</th>
+
                     <th>Apellidos</th>
                 </thead>
                 <tbody>
@@ -37,9 +39,12 @@
                         <td>{{ $pago->forma_pago->nombre  }}</td>
                         @if ($pago->persona_id)
                             <td> <span class="badge bg-warning">Persona Natural</span></td>
+                            <td>{{$pago->persona->dni}}</td>
                         @else
-                        <td> <span class="badge bg-danger">Colegiado</span></td>
+                            <td> <span class="badge bg-danger">Colegiado</span></td>
+                            <td>{{$pago->colegiado->dni}}</td>
                         @endif
+
                         <td>{{ $pago->persona->a_paterno ?? ($pago->colegiado->a_paterno." ".$pago->colegiado->a_materno) ?? 'No Existe registro'}}</td>
                     </tr>
                     @endforeach

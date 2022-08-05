@@ -24,6 +24,9 @@ class ColegiadoFactory extends Factory
             'direccion'=>$this->faker->streetAddress(),
             'ultimo_pago'=>$this->faker->date(),
             'capitulo_id'=>Capitulo::pluck('id')->random(),
+            'email' => $this->faker->email(),
+            'password' => bcrypt('holamundo'),
+            'description' => 'ingeniero de sistemas'
         ];
     }
 }
